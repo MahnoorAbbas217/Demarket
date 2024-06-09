@@ -290,8 +290,9 @@ input[type="search"]::-webkit-search-decoration {
 }
 
 .btn-info {
-    color: #2CA8FF;
+    color: #ffffff;
     border-color: #2CA8FF;
+    background-color: #2CA8FF;
 }
 
 .btn-success {
@@ -3857,4 +3858,8 @@ ul.footer-blog li {
 
 .pt-5 {
     padding-top: 25px;
+}
+
+.text-white {
+    color: white;
 }

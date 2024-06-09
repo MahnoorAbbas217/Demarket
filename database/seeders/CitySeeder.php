@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class CitySeeder extends Seeder
 {
@@ -2654,5 +2655,15 @@ class CitySeeder extends Seeder
               "lng" => "67.72562"
             ]
         ];
+
+        foreach ($cities as $city) {
+            DB::table('cities')->insert([
+                'city_name' => $city['name'],
+                'lat' => $city['lat'],
+                'lng' => $city['lng'],
+                'created_at' => now(),
+                'updated_at' => now(),
+            ]);
+        }
     }
 }

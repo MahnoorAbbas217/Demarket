@@ -7,6 +7,7 @@ use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Str;
 
 class RegisterController extends Controller
 {
@@ -51,8 +52,14 @@ class RegisterController extends Controller
         return Validator::make($data, [
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'mobile_no' => ['required','regex:/^92\d{10}$/','unique:users'],
+            'city_name' => ['required'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
-        ]);
+            ],
+            [
+                'mobile_no.required' => 'The mobile number is required.',
+                'mobile_no.regex' => 'The mobile number must start with 92 and be 12 digits long.',
+            ]);
     }
 
     /**
@@ -65,7 +72,10 @@ class RegisterController extends Controller
     {
         return User::create([
             'name' => $data['name'],
+            'store_slug' => Str::slug($data['name']).'-'.rand(1000,100000),
             'email' => $data['email'],
+            'city_name' => $data['city_name'],
+            'mobile_no' => $data['mobile_no'],
             'password' => Hash::make($data['password']),
         ]);
     }

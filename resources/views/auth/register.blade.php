@@ -16,11 +16,11 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="name">First Name</label>
-                                    <input type="text" class="form-control" id="first_name" value="{{ old('first_name') }}" name="first_name" placeholder="First Name">
+                                    <input type="text" class="form-control" id="name" value="{{ old('name') }}" name="name" placeholder="Enter your Name">
 
-                                    @error('first_name')
+                                    @error('name')
                                         <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
+                                            <strong class="text-danger">{{ $message }}</strong>
                                         </span>
                                     @enderror
                                 </div>
@@ -28,12 +28,22 @@
 
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="name">Last Name</label>
-                                    <input type="text" class="form-control" id="last_name" value="{{ old('last_name') }}" name="last_name" placeholder="Last Name">
+                                    <label for="name">City</label>
 
-                                    @error('last_name')
+                                    @php $cities = \App\Models\City::all(); @endphp
+
+                                    <select name="city_name" class="selectpicker" data-live-search="true" data-live-search-style="begins">
+                                        <option value="">Select City</option>
+                                        @if(!empty($cities))
+                                            @foreach($cities as $key => $city)
+                                                <option value="{{ $city->city_name }}" @if(old('city_name') == $city->city_name) selected @endif>{{ $city->city_name }}</option>
+                                            @endforeach
+                                        @endif
+                                    </select>
+
+                                    @error('city_name')
                                         <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
+                                            <strong class="text-danger">{{ $message }}</strong>
                                         </span>
                                     @enderror
                                 </div>
@@ -48,7 +58,7 @@
 
                                     @error('email')
                                         <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
+                                            <strong class="text-danger">{{ $message }}</strong>
                                         </span>
                                     @enderror
                                 </div>
@@ -57,11 +67,11 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="name">Mobile #</label>
-                                    <input type="number" class="form-control" value="{{ old('mobile_no') }}" id="mobile_no" name="mobile_no" placeholder="03xxxxxxxx">
+                                    <input type="number" class="form-control" value="{{ old('mobile_no') }}" id="mobile_no" name="mobile_no" placeholder="923xxxxxxxx">
 
                                     @error('mobile_no')
                                         <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
+                                            <strong class="text-danger">{{ $message }}</strong>
                                         </span>
                                     @enderror
                                 </div>
@@ -76,7 +86,7 @@
 
                                     @error('password')
                                         <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
+                                            <strong class="text-danger">{{ $message }}</strong>
                                         </span>
                                     @enderror
                                 </div>

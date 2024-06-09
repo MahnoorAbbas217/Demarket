@@ -1,6 +1,55 @@
 @extends('frontend_layout')
 @section('content')
 
+<style>
+    .modal {
+        display: none;
+        /* position: fixed;
+        z-index: 1;
+        left: 0;
+        top: 0; */
+        width: 100%;
+        height: 100%;
+        /* overflow: auto; */
+        background-color: rgb(0,0,0);
+        background-color: rgba(0,0,0,0.4);
+        animation-name: slidein;
+        animation-duration: 0.5s;
+    }
+    .modal-content {
+        background-color: #fefefe;
+        margin: 15% auto;
+        padding: 20px;
+        border: 1px solid #888;
+        width: 80%;
+        max-width: 500px;
+        border-radius: 10px;
+        transform: translateY(-100%);
+        transition: transform 0.5s ease-out;
+    }
+    .modal.show .modal-content {
+        transform: translateY(0);
+    }
+    .close {
+        color: #aaa;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+    }
+    .close:hover,
+    .close:focus {
+        color: black;
+        text-decoration: none;
+        cursor: pointer;
+    }
+    @media (max-width: 768px) {
+        .modal-content {
+            width: 90%;
+            margin: 30% auto;
+        }
+    }
+</style>
+
  <!-- property area -->
  <div class="content-area single-property" style="background-color: #FCFCFC;">&nbsp;
     <div class="container">
@@ -44,7 +93,7 @@
                     <div class="section property-features">
 
                         <a class="btn btn-info" style="" onclick="toastrSuccess('Item Added To Cart Successfully!', 'Success')">Add to Cart</a>
-                        <a href="#" class="btn btn-warning" style="">Create Offer</a>
+                        <a href="#" class="btn btn-warning" style="" id="createOfferBtn">Create Offer</a>
                         <a href="#" class="btn btn-success" style="">Buy it Now</a>
 
                         {{-- <ul>
@@ -207,6 +256,29 @@
 
 
                 </div>
+
+
+                {{-- create offer model --}}
+
+                <div id="createOfferModal" class="modal">
+                    <div class="modal-content">
+                        <span class="close">&times;</span>
+                        <h2>Create Offer</h2>
+                        <form>
+                            <div class="form-group">
+                                <label for="account">Account</label>
+                                <input type="text" class="form-control" id="account" placeholder="Enter account">
+                            </div>
+                            <div class="form-group">
+                                <label for="explanation">Short Explanation</label>
+                                <input type="text" class="form-control" id="explanation" placeholder="Enter short explanation">
+                            </div>
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                        </form>
+                    </div>
+                </div>
+
+                {{-- create offer model end here --}}
 
 
                 <section id="comments" class="comments " style="margin-top: 20px">
@@ -422,5 +494,36 @@
     </div>
 </div>
 
+
+<script>
+    // Get the modal
+    var modal = document.getElementById("createOfferModal");
+
+    // Get the button that opens the modal
+    var btn = document.getElementById("createOfferBtn");
+
+    // Get the <span> element that closes the modal
+    var span = document.getElementsByClassName("close")[0];
+
+    // When the user clicks the button, open the modal
+    btn.onclick = function() {
+        modal.classList.add('show');
+        modal.style.display = "block";
+    }
+
+    // When the user clicks on <span> (x), close the modal
+    span.onclick = function() {
+        modal.classList.remove('show');
+        modal.style.display = "none";
+    }
+
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function(event) {
+        if (event.target == modal) {
+            modal.classList.remove('show');
+            modal.style.display = "none";
+        }
+    }
+</script>
 
 @endsection

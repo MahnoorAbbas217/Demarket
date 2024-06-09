@@ -23,8 +23,11 @@ class UserFactory extends Factory
      */
     public function definition(): array
     {
+        // $categories = Cateogory::pluck('id')->toArray();
+
         $name = fake()->name();
         return [
+            // category_id => $this->faker->randomElement($categories);
             'name' => $name,
             'store_slug' => Str::slug($name).'-'.rand(1000,100000),
             'email' => fake()->unique()->safeEmail(),

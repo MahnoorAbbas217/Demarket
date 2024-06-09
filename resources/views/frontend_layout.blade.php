@@ -7,12 +7,18 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <title>{{ env('APP_NAME') }}</title>
-        <meta name="description" content="{{ $settings[4]->value ?? '' }}">
+        {{-- <meta name="description" content="{{ $settings[4]->value ?? '' }}">
         <meta name="author" content="{{ $settings[5]->value ?? '' }}">
         <meta name="keyword" content="{{ $settings[6]->value ?? '' }}">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-
+        <meta name="viewport" content="width=device-width, initial-scale=1"> --}}
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
         <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,700,800' rel='stylesheet' type='text/css'>
+
+
+        {{-- message css --}}
+
+        {{-- <link rel="stylesheet" href="{{ ('Frontend/assets/message/css/style.css') }}"> --}}
+
 
         <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
         <link rel="shortcut icon" href="{{ asset('Frontend/favicon.ico') }}" type="image/x-icon">
@@ -36,10 +42,12 @@
         <link rel="stylesheet" href="{{ asset('Frontend/assets/css/lightslider.min.css') }}">
         <link rel="stylesheet" href="{{ asset('Frontend/assets/css/responsive.css')}}">
 
+
+
         {{-- toastr css --}}
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css">
 
-    
+
     {{-- ajax --}}
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
@@ -75,7 +83,7 @@
                 <div class="collapse navbar-collapse yamm" id="navigation">
                     <div class="button navbar-right" style="margin-top:12px">
                         @if(!empty(Auth::user()))
-                            <a href="{{ url('create-ad?type=free') }}" class="navbar-btn nav-button wow fadeInRight">Sell an Item</a>
+                            <a href="{{ url('sell-item') }}" class="navbar-btn nav-button wow fadeInRight">Sell an Item</a>
                             <a class="navbar-btn nav-button wow bounceInRight login" href="{{ url('logout') }}">Logout</a>
                         @else
                             <a class="navbar-btn nav-button wow bounceInRight login" href="{{ url('login') }}">Login</a>
@@ -91,7 +99,7 @@
                         <li class="wow"><a class="" href="{{ url('products') }}">Products</a></li>
 
                         <li class="dropdown yamm-fw">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="200">My Profile <b class="caret"></b></a>
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="200">My Account <b class="caret"></b></a>
                             <ul class="dropdown-menu"  style="border: 2px solid">
                                 <li>
                                     <div class="yamm-content">
@@ -103,13 +111,13 @@
                                                         <a href="#">Sell an Item</a>
                                                     </li>
                                                     <li>
-                                                        <a href="#">My Items</a>
+                                                        <a href="{{ url('my-items') }}">My Items</a>
                                                     </li>
                                                     <li>
-                                                        <a href="#">Sold Items</a>
+                                                        <a href="{{ url('my-items?type=sold') }}">Sold Items</a>
                                                     </li>
                                                     <li>
-                                                        <a href="#">Unsold Items</a>
+                                                        <a href="{{ url('my-items?type=unsold') }}">Unsold Items</a>
                                                     </li>
                                                     <li>
                                                         <a href="#">Payments</a>
@@ -119,10 +127,10 @@
                                             <div class="col-sm-4">
                                                 <h5>Buyer</h5>
                                                 <ul>
-                                                    <li><a href="#">Bids</a>  </li>
-                                                    <li><a href="#">Rcently Viewed</a>  </li>
-                                                    <li><a href="#">Saved</a>  </li>
-                                                    <li><a href="#">Purchase History</a>  </li>
+                                                    <li><a href="{{ url('bids') }}">Bids</a>  </li>
+                                                    <li><a href="{{ url('recently-viewed') }}">Rcently Viewed</a>  </li>
+                                                    <li><a href="{{ url('saved-items') }}">Saved</a>  </li>
+                                                    <li><a href="{{ url('purchase-history') }}">Purchase History</a>  </li>
                                                     <li><a href="#">My Returns</a> </li>
                                                     <li><a href="#">Rating & Reviews</a> </li>
                                                 </ul>
@@ -130,11 +138,11 @@
                                             <div class="col-sm-4">
                                                 <h5>Account</h5>
                                                 <ul>
-                                                    <li><a href="#">Wallets</a> </li>
-                                                    <li><a href="#">Profile</a> </li>
-                                                    <li><a href="#">Setting</a> </li>
-                                                    <li><a href="#">Membership</a> </li>
-                                                    <li><a href="#">Change Password</a> </li>
+                                                    <li><a href="{{ url('messages') }}">Messages</a> </li>
+                                                    <li><a href="{{ url('profile') }}">Profile</a> </li>
+                                                    <li><a href="{{ url('setting') }}">Setting</a> </li>
+                                                    <li><a href="{{ url('membership') }}">Membership</a> </li>
+                                                    <li><a href="{{ url('change-password') }}">Change Password</a> </li>
                                                 </ul>
                                             </div>
                                         </div>
@@ -148,8 +156,7 @@
 
                         {{-- <li class="wow fadeInDown"><a class="" href="{{ url('about-us') }}">About us</a></li> --}}
                         @if(!empty(Auth::user()))
-                            <li class="wow fadeInDown" data-wow-delay="0.3s"><a class="" href="{{ url('profile') }}">My Account</a></li>
-                            <li class="wow fadeInDown" data-wow-delay="0.3s"><a class="" href="{{ url('my-ads') }}">My Ads</a></li>
+                            <li><a  href="{{ url('cart') }}">Cart</a></li>
                         @endif
 
 
@@ -331,6 +338,17 @@
 
         <script type="text/javascript" src="{{ ('frontend/assets/js/lightslider.min.js') }}"></script>
         <script src="{{ asset('Frontend/assets/js/main.js') }}"></script>
+
+        {{-- table js --}}
+
+        {{-- <script src="{{asset ('Frontend/assets/table/js/jquery.min.js') }}"></script>
+        <script src="{{asset ('Frontend/assets/table/js/popper.js') }}"></script>
+        <script src="{{asset ('Frontend/assets/table/js/bootstrap.min.js') }}"></script>
+        <script src="{{asset ('Frontend/assets/table/js/main.js') }}"></script> --}}
+
+        {{-- message js --}}
+
+        {{-- <script  src="Frontend/assets/message/js/script.js"></script> --}}
 
 
 
