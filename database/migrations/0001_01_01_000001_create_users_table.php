@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->uuid('id')->primary();
+            // $table->id();
             $table->string('google_id')->nullable();
             $table->foreignUuid('membership_id')->default(1);
             $table->string('store_slug');

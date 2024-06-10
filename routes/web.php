@@ -59,7 +59,7 @@ Route::middleware('auth')->group(function(){
     });
 
     Route::get('messages', function () {
-        return view('Profile.Message');
+        return view('Profile.messages');
     });
 
     Route::get('setting', function () {

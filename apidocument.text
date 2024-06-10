@@ -1,0 +1,136 @@
+'headers' => [
+    'Accept' => 'application/json',
+    'Authorization' => 'Bearer '.$accessToken,
+]
+
+
+=> get items:
+    http: //127.0.0.1:8000/api/items
+    type: get
+    return 20 items order by desc and also 10 items random pick
+
+
+=> get more then 20 items then pass ?page=2 parameter
+    http: //127.0.0.1:8000/api/items?page=2
+    type: get
+    return 20+ - 4- items
+
+
+=> get item by it's id
+    http: //127.0.0.1:8000/api/item/{item_id}
+    type: get
+
+
+=> get all active categories
+    http: //127.0.0.1:8000/api/categories
+    type: get
+    reurn all active categories with it's subcategories
+
+
+=> get cateogry by it's id
+    api/category/{id}
+    type:get
+
+=> get all active categories by name pass parameter category_name
+    http: //127.0.0.1:8000/api/categories?category_name=abc
+    type: get
+    reurn those categories who match with category_name with it's subcategories
+
+
+=> get all active sub categories
+    http: //127.0.0.1:8000/api/sub-categories
+    type: get
+    reurn all active subcategories with it's category
+
+
+=> get all active subcategories by name pass parameter sub_category_name
+    http: //127.0.0.1:8000/api/sub-categories?sub_category_name=abc
+    type: get
+    reurn those subcategories who match with sub_category_name with it's category
+
+
+=> get my-items (who login)
+    http: //127.0.0.1:8000/api/my-items
+    type: get
+    return your all created items
+
+=> get my sold items (mean that those who sold)
+    http: //127.0.0.1:8000/api/my-sold-items?type=sold
+    type: get
+    return your all created items who sold
+
+=> get my unsold items (mean that those who not sold)
+    http: //127.0.0.1:8000/api/my-sold-items?type=unsold
+    type: get
+    return your all created items who not sold
+
+
+=> get all memberships
+    http: //127.0.0.1:8000/api/memberships
+    type: get
+    return all memberships data
+
+=> get specific membership
+    http: //127.0.0.1:8000/api/membership/{membership_id}
+    type: get
+    return specific membership data
+
+
+=> get all cities
+    http: //127.0.0.1:8000/api/cities
+    type: get
+    return all cities data where city option require
+
+=> user profile
+    http: //127.0.0.1:8000/api/my-profile
+    type: get
+    return login user profile data
+
+=> update user profile
+    http: //127.0.0.1:8000/api/update-my-profile
+    type: post
+    require = all myprofile data
+
+    data:
+    "store_slug",
+    "name",
+    "mobile_no",
+    "profile_image": 
+    "city_name",
+    "shipping_address",
+    "personal_address",
+    "cnic_front_copy",
+    "cnic_back_copy",
+    "date_of_birth",
+
+=> login user change password
+    http: //127.0.0.1:8000/api/change-password
+    type: post
+    require
+
+    data:
+    old_password
+    password
+    password_confirmation
+
+
+=> get my saved items
+    http: //127.0.0.1:8000/api/my-saved-items
+    type: get
+    return your saved items orderby time
+
+
+=> get my saved items
+    http: //127.0.0.1:8000/api/my-recently-viewed-items
+    type: get
+    return your recently viewed items orderby time
+
+=> get your all offers/bids who sent
+    http: //127.0.0.1:8000/api/my-bids
+    type: get
+    return your all bids
+
+=> cart
+    http: //127.0.0.1:8000/api/carts
+    type: get
+    return your cart items

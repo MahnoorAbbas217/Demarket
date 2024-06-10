@@ -1,8 +1,8 @@
 @extends('frontend_layout')
 @section('content')
 
-<div class="wrapper">
-    <div class="container">
+<div class="message_wrapper">
+    <div class="container message_container">
         <div class="left">
             <div class="top">
                 <input type="text" placeholder="Search" />

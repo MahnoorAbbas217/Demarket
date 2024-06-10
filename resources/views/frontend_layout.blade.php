@@ -17,7 +17,7 @@
 
         {{-- message css --}}
 
-        {{-- <link rel="stylesheet" href="{{ ('Frontend/assets/message/css/style.css') }}"> --}}
+        <link rel="stylesheet" href="{{ ('Frontend/assets/message/css/style.css') }}">
 
 
         <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
@@ -348,7 +348,7 @@
 
         {{-- message js --}}
 
-        {{-- <script  src="Frontend/assets/message/js/script.js"></script> --}}
+        <script  src="{{ ('Frontend/assets/message/js/script.js') }}"></script>
 
 
 
