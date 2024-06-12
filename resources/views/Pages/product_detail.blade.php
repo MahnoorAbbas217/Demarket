@@ -406,7 +406,7 @@
 
 
                                 <div class="clear text-center" style="margin-top: 20px">
-                                    <a href="#" class="btn btn-info btn-sm">Visit Store</a>
+                                    <a href="{{ url('store') }}" class="btn btn-info btn-sm">Visit Store</a>
                                     <a href="#" class="btn btn-success btn-sm">Contact Seller</a>
                                 </div>
 

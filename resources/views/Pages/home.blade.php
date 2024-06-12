@@ -176,7 +176,7 @@
                         @if($i == 6)
                         <div class="col-sm-6 col-md-3 p0">
                             <div class="box-two proerty-item proerty-item-ads">
-                                <a href="#" ><img src="{{ asset('Frontend/assets/img/pro-ads.jpg') }}"></a>
+                                <a href="{{ url('product-detail') }}" ><img src="{{ asset('Frontend/assets/img/pro-ads.jpg') }}"></a>
                             </div>
                         </div>
                         @else
@@ -184,7 +184,7 @@
                         <div class="col-sm-6 col-md-3 p0 mt-3">
                             <div class="box-two proerty-item">
                                 <div class="item-thumb">
-                                    <a href="#" target="_blank"><img src="{{ asset('uploads/ad/ad-default.png') }}"></a>
+                                    <a href="{{ url('product-detail') }}" target="_blank"><img src="{{ asset('uploads/ad/ad-default.png') }}"></a>
                                 </div>
 
                                 <div class="item-entry overflow">

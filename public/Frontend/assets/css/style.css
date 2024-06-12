@@ -3492,21 +3492,21 @@ blog
     border-top: 1px solid #D1D1D1;
     background-color: #080000;
     /* background: #555 url("../../assets/img/bg-footer.jpg") repeat scroll 0% 0%; */
-    color: #535353;
+    color: #ffffff;
 }
 
 .footer {
     padding: 0px 0px 60px;
-    background: rgba(255, 255, 255, 0.89) none repeat scroll 0% 0%;
+    background: rgba(0, 0, 0, 0.89) none repeat scroll 0% 0%;
 }
 
 .footer ul li i {
     padding-right: 10px;
-    color: #000;
+    color: #ffffff;
 }
 
 .footer-copy {
-    background: rgba(213, 213, 213, 0.9) none repeat scroll 0% 0%;
+    background: rgba(0, 0, 0, 0.9) none repeat scroll 0% 0%;
     border-top: 0.051px solid rgba(162, 162, 162, 0.46);
     padding-bottom: 0px;
     padding-bottom: 7px;
@@ -3528,7 +3528,7 @@ blog
 }
 
 .footer h4 {
-    color: #717171;
+    color: #ffffff;
     font-weight: 400;
     margin-top: 0px;
     font-size: 20px;
@@ -3546,7 +3546,7 @@ blog
 .footer-title-line {
     width: 100px;
     height: 2px;
-    background: #FFA600;
+    background: #ffffff;
     margin: 0px 0px 33px;
     position: relative;
     top: -2px;
@@ -3581,19 +3581,19 @@ ul.footer-adress li {
 }
 
 .footer ul li a {
-    color: #535353;
+    color: #ffffff;
     font-weight: 500;
     text-transform: uppercase;
     font-size: 13px;
 }
 
 .footer ul li a:hover {
-    color: #FDC600;
+    color: #fffae7;
     text-decoration: none;
 }
 
 .footer-menu li {
-    border-bottom: 1px solid rgba(255, 171, 0, 0.31);
+    border-bottom: 1px solid rgba(253, 253, 253, 0.31);
 }
 
 .footer-copy span {

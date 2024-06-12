@@ -121,7 +121,7 @@
                     <div class="col-sm-6 col-md-3 p0">
                         <div class="box-two proerty-item">
                             <div class="item-thumb">
-                                <a href="property-1.html" ><img src="assets/img/demo/property-3.jpg"></a>
+                                <a href="property-1.html" ><img src="Frontend/assets/img/demo/property-3.jpg"></a>
                             </div>
 
                             <div class="item-entry overflow">
@@ -131,9 +131,9 @@
                                 <span class="proerty-price pull-right"> $ 300,000</span>
                                 <p style="display: none;">Suspendisse ultricies Suspendisse ultricies Nulla quis dapibus nisl. Suspendisse ultricies commodo arcu nec pretium ...</p>
                                 <div class="property-icon">
-                                    <img src="assets/img/icon/bed.png">(5)|
-                                    <img src="assets/img/icon/shawer.png">(2)|
-                                    <img src="assets/img/icon/cars.png">(1)
+                                    <img src="Frontend/assets/img/icon/bed.png">(5)|
+                                    <img src="Frontend/assets/img/icon/shawer.png">(2)|
+                                    <img src="Frontend/assets/img/icon/cars.png">(1)
                                 </div>
 
                                 <div class="dealer-action pull-right">                                        
@@ -150,7 +150,7 @@
                     <div class="col-sm-6 col-md-3 p0">
                         <div class="box-two proerty-item">
                             <div class="item-thumb">
-                                <a href="property-1.html" ><img src="assets/img/demo/property-2.jpg"></a>
+                                <a href="property-1.html" ><img src="Frontend/assets/img/demo/property-2.jpg"></a>
                             </div>
 
                             <div class="item-entry overflow">
@@ -160,9 +160,9 @@
                                 <span class="proerty-price pull-right"> $ 300,000</span>
                                 <p style="display: none;">Suspendisse ultricies Suspendisse ultricies Nulla quis dapibus nisl. Suspendisse ultricies commodo arcu nec pretium ...</p>
                                 <div class="property-icon">
-                                    <img src="assets/img/icon/bed.png">(5)|
-                                    <img src="assets/img/icon/shawer.png">(2)|
-                                    <img src="assets/img/icon/cars.png">(1)
+                                    <img src="Frontend/assets/img/icon/bed.png">(5)|
+                                    <img src="Frontend/assets/img/icon/shawer.png">(2)|
+                                    <img src="Frontend/assets/img/icon/cars.png">(1)
                                 </div>
                             </div>
 
@@ -172,14 +172,14 @@
 
                     <div class="col-sm-6 col-md-3 p0">
                         <div class="box-two proerty-item proerty-item-ads">
-                            <a href="" ><img src="assets/img/pro-ads.jpg"></a>
+                            <a href="" ><img src="Frontend/assets/img/pro-ads.jpg"></a>
                         </div>
                     </div>
 
                     <div class="col-sm-6 col-md-3 p0">
                         <div class="box-two proerty-item">
                             <div class="item-thumb">
-                                <a href="property-1.html" ><img src="assets/img/demo/property-3.jpg"></a>
+                                <a href="property-1.html" ><img src="Frontend/assets/img/demo/property-3.jpg"></a>
                             </div>
 
                             <div class="item-entry overflow">
@@ -189,9 +189,9 @@
                                 <span class="proerty-price pull-right"> $ 300,000</span>
                                 <p style="display: none;">Suspendisse ultricies Suspendisse ultricies Nulla quis dapibus nisl. Suspendisse ultricies commodo arcu nec pretium ...</p>
                                 <div class="property-icon">
-                                    <img src="assets/img/icon/bed.png">(5)|
-                                    <img src="assets/img/icon/shawer.png">(2)|
-                                    <img src="assets/img/icon/cars.png">(1)
+                                    <img src="Frontend/assets/img/icon/bed.png">(5)|
+                                    <img src="Frontend/assets/img/icon/shawer.png">(2)|
+                                    <img src="Frontend/assets/img/icon/cars.png">(1)
                                 </div>
                             </div>
 
@@ -202,7 +202,7 @@
                     <div class="col-sm-6 col-md-3 p0">
                         <div class="box-two proerty-item">
                             <div class="item-thumb">
-                                <a href="property-1.html" ><img src="assets/img/demo/property-1.jpg"></a>
+                                <a href="property-1.html" ><img src="Frontend/assets/img/demo/property-1.jpg"></a>
                             </div>
 
                             <div class="item-entry overflow">
@@ -212,9 +212,9 @@
                                 <span class="proerty-price pull-right"> $ 300,000</span>
                                 <p style="display: none;">Suspendisse ultricies Suspendisse ultricies Nulla quis dapibus nisl. Suspendisse ultricies commodo arcu nec pretium ...</p>
                                 <div class="property-icon">
-                                    <img src="assets/img/icon/bed.png">(5)|
-                                    <img src="assets/img/icon/shawer.png">(2)|
-                                    <img src="assets/img/icon/cars.png">(1)
+                                    <img src="Frontend/assets/img/icon/bed.png">(5)|
+                                    <img src="Frontend/assets/img/icon/shawer.png">(2)|
+                                    <img src="Frontend/assets/img/icon/cars.png">(1)
                                 </div>
                             </div>
 
@@ -225,7 +225,7 @@
                     <div class="col-sm-6 col-md-3 p0">
                         <div class="box-two proerty-item">
                             <div class="item-thumb">
-                                <a href="property-1.html" ><img src="assets/img/demo/property-2.jpg"></a>
+                                <a href="property-1.html" ><img src="Frontend/assets/img/demo/property-2.jpg"></a>
                             </div>
 
                             <div class="item-entry overflow">
@@ -235,9 +235,9 @@
                                 <span class="proerty-price pull-right"> $ 300,000</span>
                                 <p style="display: none;">Suspendisse ultricies Suspendisse ultricies Nulla quis dapibus nisl. Suspendisse ultricies commodo arcu nec pretium ...</p>
                                 <div class="property-icon">
-                                    <img src="assets/img/icon/bed.png">(5)|
-                                    <img src="assets/img/icon/shawer.png">(2)|
-                                    <img src="assets/img/icon/cars.png">(1)
+                                    <img src="Frontend/assets/img/icon/bed.png">(5)|
+                                    <img src="Frontend/assets/img/icon/shawer.png">(2)|
+                                    <img src="Frontend/assets/img/icon/cars.png">(1)
                                 </div>
                             </div>
 
@@ -248,7 +248,7 @@
                     <div class="col-sm-6 col-md-3 p0">
                         <div class="box-two proerty-item">
                             <div class="item-thumb">
-                                <a href="property-1.html" ><img src="assets/img/demo/property-3.jpg"></a>
+                                <a href="property-1.html" ><img src="Frontend/assets/img/demo/property-3.jpg"></a>
                             </div>
 
                             <div class="item-entry overflow">
@@ -258,9 +258,9 @@
                                 <span class="proerty-price pull-right"> $ 300,000</span>
                                 <p style="display: none;">Suspendisse ultricies Suspendisse ultricies Nulla quis dapibus nisl. Suspendisse ultricies commodo arcu nec pretium ...</p>
                                 <div class="property-icon">
-                                    <img src="assets/img/icon/bed.png">(5)|
-                                    <img src="assets/img/icon/shawer.png">(2)|
-                                    <img src="assets/img/icon/cars.png">(1)
+                                    <img src="Frontend/assets/img/icon/bed.png">(5)|
+                                    <img src="Frontend/assets/img/icon/shawer.png">(2)|
+                                    <img src="Frontend/assets/img/icon/cars.png">(1)
                                 </div>
                             </div>
 
@@ -271,7 +271,7 @@
                     <div class="col-sm-6 col-md-3 p0">
                         <div class="box-two proerty-item">
                             <div class="item-thumb">
-                                <a href="property-1.html" ><img src="assets/img/demo/property-2.jpg"></a>
+                                <a href="property-1.html" ><img src="Frontend/assets/img/demo/property-2.jpg"></a>
                             </div>
 
                             <div class="item-entry overflow">
@@ -281,9 +281,9 @@
                                 <span class="proerty-price pull-right"> $ 300,000</span>
                                 <p style="display: none;">Suspendisse ultricies Suspendisse ultricies Nulla quis dapibus nisl. Suspendisse ultricies commodo arcu nec pretium ...</p>
                                 <div class="property-icon">
-                                    <img src="assets/img/icon/bed.png">(5)|
-                                    <img src="assets/img/icon/shawer.png">(2)|
-                                    <img src="assets/img/icon/cars.png">(1)
+                                    <img src="Frontend/assets/img/icon/bed.png">(5)|
+                                    <img src="Frontend/assets/img/icon/shawer.png">(2)|
+                                    <img src="Frontend/assets/img/icon/cars.png">(1)
                                 </div>
                             </div>
 
@@ -294,7 +294,7 @@
                     <div class="col-sm-6 col-md-3 p0">
                         <div class="box-two proerty-item">
                             <div class="item-thumb">
-                                <a href="property-1.html" ><img src="assets/img/demo/property-1.jpg"></a>
+                                <a href="property-1.html" ><img src="Frontend/assets/img/demo/property-1.jpg"></a>
                             </div>
 
                             <div class="item-entry overflow">
@@ -304,9 +304,9 @@
                                 <span class="proerty-price pull-right"> $ 300,000</span>
                                 <p style="display: none;">Suspendisse ultricies Suspendisse ultricies Nulla quis dapibus nisl. Suspendisse ultricies commodo arcu nec pretium ...</p>
                                 <div class="property-icon">
-                                    <img src="assets/img/icon/bed.png">(5)|
-                                    <img src="assets/img/icon/shawer.png">(2)|
-                                    <img src="assets/img/icon/cars.png">(1)
+                                    <img src="Frontend/assets/img/icon/bed.png">(5)|
+                                    <img src="Frontend/assets/img/icon/shawer.png">(2)|
+                                    <img src="Frontend/assets/img/icon/cars.png">(1)
                                 </div>
                             </div>
 
@@ -316,14 +316,14 @@
 
                     <div class="col-sm-6 col-md-3 p0">
                         <div class="box-two proerty-item proerty-item-ads">
-                            <a href="" ><img src="assets/img/pro-ads.jpg"></a>
+                            <a href="" ><img src="Frontend/assets/img/pro-ads.jpg"></a>
                         </div>
                     </div>
 
                     <div class="col-sm-6 col-md-3 p0">
                         <div class="box-two proerty-item">
                             <div class="item-thumb">
-                                <a href="property-1.html" ><img src="assets/img/demo/property-2.jpg"></a>
+                                <a href="property-1.html" ><img src="Frontend/assets/img/demo/property-2.jpg"></a>
                             </div>
 
                             <div class="item-entry overflow">
@@ -333,9 +333,9 @@
                                 <span class="proerty-price pull-right"> $ 300,000</span>
                                 <p style="display: none;">Suspendisse ultricies Suspendisse ultricies Nulla quis dapibus nisl. Suspendisse ultricies commodo arcu nec pretium ...</p>
                                 <div class="property-icon">
-                                    <img src="assets/img/icon/bed.png">(5)|
-                                    <img src="assets/img/icon/shawer.png">(2)|
-                                    <img src="assets/img/icon/cars.png">(1)
+                                    <img src="Frontend/assets/img/icon/bed.png">(5)|
+                                    <img src="Frontend/assets/img/icon/shawer.png">(2)|
+                                    <img src="Frontend/assets/img/icon/cars.png">(1)
                                 </div>
                             </div>
 
@@ -346,7 +346,7 @@
                     <div class="col-sm-6 col-md-3 p0">
                         <div class="box-two proerty-item">
                             <div class="item-thumb">
-                                <a href="property-1.html" ><img src="assets/img/demo/property-1.jpg"></a>
+                                <a href="property-1.html" ><img src="Frontend/assets/img/demo/property-1.jpg"></a>
                             </div>
 
                             <div class="item-entry overflow">
@@ -356,9 +356,9 @@
                                 <span class="proerty-price pull-right"> $ 300,000</span>
                                 <p style="display: none;">Suspendisse ultricies Suspendisse ultricies Nulla quis dapibus nisl. Suspendisse ultricies commodo arcu nec pretium ...</p>
                                 <div class="property-icon">
-                                    <img src="assets/img/icon/bed.png">(5)|
-                                    <img src="assets/img/icon/shawer.png">(2)|
-                                    <img src="assets/img/icon/cars.png">(1)
+                                    <img src="Frontend/assets/img/icon/bed.png">(5)|
+                                    <img src="Frontend/assets/img/icon/shawer.png">(2)|
+                                    <img src="Frontend/assets/img/icon/cars.png">(1)
                                 </div>
                             </div>
 

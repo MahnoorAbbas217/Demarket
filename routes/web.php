@@ -17,7 +17,7 @@ Route::get('product-detail', function () {
 });
 
 Route::get('sell-item', function () {
-    return view('Pages.create_ad');
+    return view('Pages.sell_an_item');
 });
 
 Route::get('store', function () {

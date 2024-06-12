@@ -1,8 +1,22 @@
+=> mainurl: https://emarket.deliverers.uk/public
+=> mediaUrl: https://emarket.deliverers.uk/public
+=> apiUrl: https://emarket.deliverers.uk/public
+
+
+=> add headers and accessToken
 'headers' => [
     'Accept' => 'application/json',
     'Authorization' => 'Bearer '.$accessToken,
 ]
 
+=> login
+    http: //127.0.0.1:8000/api/items
+    type: post
+    require
+
+    data:
+    email: customer@gmail.com
+    password: 123123123
 
 => get items:
     http: //127.0.0.1:8000/api/items
@@ -130,7 +144,52 @@
     type: get
     return your all bids
 
-=> cart
+=> my cart
     http: //127.0.0.1:8000/api/carts
     type: get
     return your cart items
+
+// remamining
+=> add to cart
+    http: //127.0.0.1:8000/api/add-to-cart?item_id=abc
+    type: get
+    return : it will add item to your cart and reqturn message
+
+=> delete from cart
+    http: //127.0.0.1:8000/api/delete-from-cart?item_id=abc
+    type: get
+    return : it will delete item from your cart and reqturn message
+
+=> delete from cart
+    http: //127.0.0.1:8000/api/delete-from-cart?item_id=abc
+    type: get
+    return : it will delete item from your cart and reqturn message
+
+=> active sliders
+    http: //127.0.0.1:8000/api/sliders
+    type: get
+    return you all active sliders to show on home page
+
+=> add your bid to item
+    http: //127.0.0.1:8000/api/add-bid
+    type: post
+    
+    data:
+    item_id = abc,
+    bid_price = 20,
+    note = optional message,
+
+=> delete your pending bid from your bid list
+    http: //127.0.0.1:8000/api/delete-bid?bid_id=abc
+    type: get
+    return deleted message
+
+=> reviews & rating of item after order complete
+    http: //127.0.0.1:8000/api/add-review-rating
+    type: post
+    
+    data:
+    item_id
+    order_id
+    rating (1-5)
+    review
