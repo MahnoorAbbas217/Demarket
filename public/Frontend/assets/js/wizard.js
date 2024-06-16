@@ -190,101 +190,100 @@ $(document).ready(function() {
     });
 
     // Prepare the preview for profile picture
+    $("#wizard-picture").change(function() {
+        readURL(this);
+    });
+
     $("#wizard-picture0").change(function() {
-        readURL(this, 0);
-        toastrError('wiz 0', 'error');
+        readURL0(this);
     });
 
-    $("#wizard-picture1").change(function() {
-        readURL(this, 1);
-        toastrError('wiz 11', 'error');
+    // $("#wizard-picture1").change(function() {
+    //     readURL(this, 1);
 
 
-    });
+    // });
 
-    $("#wizard-picture2").change(function() {
-        try {
-            readURL(this, 2);
-        } catch (error) {
-            console.error('Error reading file:', error);
-            toastr.error('An error occurred while reading the file.', 'Error');
-        }
-        toastrError('wiz 1', 'error');
+    // $("#wizard-picture2").change(function() {
+    //     try {
+    //         readURL(this, 2);
+    //     } catch (error) {
+    //         console.error('Error reading file:', error);
+    //         toastr.error('An error occurred while reading the file.', 'Error');
+    //     }
 
 
-    });
+    // });
 
-    $("#wizard-picture3").change(function() {
-        readURL(this, 3);
-        toastrError('wiz 2', 'error');
+    // $("#wizard-picture3").change(function() {
+    //     readURL(this, 3);
 
-    });
+    // });
 
-    $("#wizard-picture4").change(function() {
-        readURL(this, 4);
-        toastrError('wiz 3', 'error');
+    // $("#wizard-picture4").change(function() {
+    //     readURL(this, 4);
 
-    });
+    // });
 
-    $("#wizard-picture5").change(function() {
-        readURL(this, 5);
-    });
+    // $("#wizard-picture5").change(function() {
+    //     readURL(this, 5);
+    // });
 
-    $("#wizard-picture6").change(function() {
-        readURL(this, 6);
-    });
+    // $("#wizard-picture6").change(function() {
+    //     readURL(this, 6);
+    // });
 
-    $("#wizard-picture8").change(function() {
-        readURL(this, 8);
-    });
+    // $("#wizard-picture8").change(function() {
+    //     readURL(this, 8);
+    // });
 
-    $("#wizard-picture9").change(function() {
-        readURL(this, 9);
-    });
+    // $("#wizard-picture9").change(function() {
+    //     readURL(this, 9);
+    // });
 
-    $("#wizard-picture10").change(function() {
-        readURL(this, 10);
-    });
+    // $("#wizard-picture10").change(function() {
+    //     readURL(this, 10);
+    // });
 
-    $("#wizard-picture11").change(function() {
-        readURL(this, 11);
-    });
+    // $("#wizard-picture11").change(function() {
+    //     readURL(this, 11);
+    // });
 
-    $("#wizard-picture12").change(function() {
-        readURL(this, 12);
-    });
+    // $("#wizard-picture12").change(function() {
+    //     readURL(this, 12);
+    // });
 
-    $("#wizard-picture13").change(function() {
-        readURL(this, 13);
-    });
+    // $("#wizard-picture13").change(function() {
+    //     readURL(this, 13);
+    // });
 
-    $("#wizard-picture14").change(function() {
-        readURL(this, 14);
-    });
+    // $("#wizard-picture14").change(function() {
+    //     readURL(this, 14);
+    // });
 
-    $("#wizard-picture15").change(function() {
-        readURL(this, 15);
-    });
+    // $("#wizard-picture15").change(function() {
+    //     readURL(this, 15);
+    // });
 
-    $("#wizard-picture16").change(function() {
-        readURL(this, 16);
-    });
+    // $("#wizard-picture16").change(function() {
+    //     readURL(this, 16);
+    // });
 
-    $("#wizard-picture17").change(function() {
-        readURL(this, 17);
-    });
+    // $("#wizard-picture17").change(function() {
+    //     readURL(this, 17);
+    // });
 
-    $("#wizard-picture18").change(function() {
-        readURL(this, 18);
-    });
+    // $("#wizard-picture18").change(function() {
+    //     readURL(this, 18);
+    // });
 
-    $("#wizard-picture19").change(function() {
-        readURL(this, 19);
-    });
+    // $("#wizard-picture19").change(function() {
+    //     readURL(this, 19);
+    // });
 
-    $("#wizard-picture20").change(function() {
-        readURL(this, 20);
-    });
+    // $("#wizard-picture20").change(function() {
+    //     readURL(this, 20);
+    // });
 
 
 
@@ -404,17 +403,25 @@ function validateThirdStep() {
 
 //Function to show image before upload
 
-function readURL(input, idNum) {
+function readURL(input) {
 
     if (input.files && input.files[0]) {
         var reader = new FileReader();
 
-        // var wizardPicturePreview = '#wizardPicturePreview';
-        // if (idNum > 0) {
-        //     wizardPicturePreview = '#wizardPicturePreview' + idNum;
-        // }
         reader.onload = function(e) {
-            $('#wizardPicturePreview' + idNum).attr('src', e.target.result).fadeIn('slow');
+            $('#wizardPicturePreview').attr('src', e.target.result).fadeIn('slow');
+        }
+        reader.readAsDataURL(input.files[0]);
+    }
+}
+
+function readURL0(input) {
+
+    if (input.files && input.files[0]) {
+        var reader = new FileReader();
+
+        reader.onload = function(e) {
+            $('#wizardPicturePreview0').attr('src', e.target.result).fadeIn('slow');
         }
         reader.readAsDataURL(input.files[0]);
     }

@@ -4,21 +4,22 @@ use App\Models\Membership;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('Pages.home');
-});
+// Route::get('/', function () {
+//     return view('Pages.home');
+// });
+Route::get('/', [App\Http\Controllers\HomeViewController::class, 'index']);
+Route::get('products', [App\Http\Controllers\HomeViewController::class, 'items']);
+Route::get('product-detail/{item_id}', [App\Http\Controllers\HomeViewController::class, 'itemDetail']);
 
-Route::get('products', function () {
-    return view('Pages.products');
-});
+// Route::get('products', function () {
+//     return view('Pages.products');
+// });
 
 Route::get('product-detail', function () {
     return view('Pages.product_detail');
 });
 
-Route::get('sell-item', function () {
-    return view('Pages.sell_an_item');
-});
+
 
 Route::get('store', function () {
     return view('Pages.store');
@@ -26,10 +27,17 @@ Route::get('store', function () {
 
 Route::middleware('auth')->group(function(){
 
+    // sell item
+    Route::get('sell-item', [App\Http\Controllers\ItemController::class, 'create']);
+    Route::post('store-sell-item', [App\Http\Controllers\ItemController::class, 'store']);
+    Route::get('my-items', [App\Http\Controllers\ItemController::class, 'myItems']);
+    Route::get('delete-my-item/{item_id}', [App\Http\Controllers\ItemController::class, 'deleteMyItem']);
+
+
     // selling
-    Route::get('my-items', function () {
-        return view('Seller.my_items');
-    });
+    // Route::get('my-items', function () {
+    //     return view('Seller.my_items');
+    // });
 
     // customer
     Route::get('recently-viewed', function () {
@@ -56,6 +64,10 @@ Route::middleware('auth')->group(function(){
 
     Route::get('profile', function () {
         return view('Profile.profile');
+    });
+
+    Route::get('identity-verification', function () {
+        return view('Profile.identity_verification');
     });
 
     Route::get('messages', function () {

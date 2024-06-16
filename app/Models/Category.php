@@ -22,4 +22,9 @@ class Category extends Model
     function subCategory() {
         return $this->hasMany(SubCategory::class, 'category_id', 'id');
     }
+
+    public function scopeActivePublication($query)
+    {
+        return $query->where('publication_status', 'active');
+    }
 }

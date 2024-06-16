@@ -6,21 +6,25 @@
 <div class="properties-area recent-property" style="background-color: #FFF;">
     <div class="container">
         <div class="row  pr0 padding-top-40 properties-page">
+
+
+            {{-- advance filter --}}
             <div class="col-md-12 padding-bottom-40 large-search">
                 <div class="search-form wow pulse">
-                    <form action="" class=" form-inline">
+                    <form action="{{ URL::to('products') }}" method="get" class=" form-inline">
+                        @csrf
                         <div class="col-md-12">
                             <div class="col-md-7">
-                                <input type="text" class="form-control" placeholder="Key word">
+                                <input type="text" class="form-control" name="keyword" placeholder="Key word" @if(isset($_GET['keyword']) && $_GET['keyword'] != '') value="{{ $_GET['keyword'] }}" @endif>
                             </div>
                             <div class="col-md-5">
-                                <select id="lunchBegins" class="selectpicker" data-live-search="true" data-live-search-style="begins" title="Select Category">
-                                    <option>New york, CA</option>
-                                    <option>Paris</option>
-                                    <option>Casablanca</option>
-                                    <option>Tokyo</option>
-                                    <option>Marraekch</option>
-                                    <option>kyoto , shibua</option>
+                                <select id="lunchBegins" class="selectpicker" data-live-search="true" data-live-search-style="begins" name="category">
+                                    <option value="" selected>Select Category</option>
+                                    @if(!empty($categories))
+                                        @foreach($categories as $category)
+                                            <option value="{{ $category->id }}" @if(isset($_GET['category']) && $_GET['category'] != '' && $_GET['category'] == $category->id) selected @endif>{{ $category->category_name }}</option>
+                                        @endforeach
+                                    @endif
                                 </select>
                             </div>
                         </div>
@@ -30,7 +34,7 @@
                                 <div class="col-sm-2">
                                     <div class="checkbox">
                                         <label>
-                                            <input type="checkbox"> New Item
+                                            <input type="checkbox" name="item_type_new" @if(isset($_GET['item_type_new']) && $_GET['item_type_new'] == 'on') checked @endif> New Item
                                         </label>
                                     </div>
                                 </div>
@@ -39,7 +43,7 @@
                                 <div class="col-sm-2">
                                     <div class="checkbox">
                                         <label>
-                                            <input type="checkbox"> Used Item
+                                            <input type="checkbox" name="item_type_used" @if(isset($_GET['item_type_used']) && $_GET['item_type_used'] == 'on') checked @endif> Used Item
                                         </label>
                                     </div>
                                 </div>
@@ -48,7 +52,7 @@
                                 <div class="col-sm-3">
                                     <div class="checkbox">
                                         <label>
-                                            <input type="checkbox"> Free Shipping
+                                            <input type="checkbox"  name="free_shipping" @if(isset($_GET['free_shipping']) && $_GET['free_shipping'] == 'on') checked @endif> Free Shipping
                                         </label>
                                     </div>
                                 </div>
@@ -57,7 +61,7 @@
                                 <div class="col-sm-2">
                                     <div class="checkbox">
                                         <label>
-                                            <input type="checkbox"> Auction Item
+                                            <input type="checkbox"  name="auction_item" @if(isset($_GET['auction_item']) && $_GET['auction_item'] == 'on') checked @endif> Auction Item
                                         </label>
                                     </div>
                                 </div>
@@ -66,7 +70,7 @@
                                 <div class="col-sm-3">
                                     <div class="checkbox">
                                         <label>
-                                            <input type="checkbox"> Verified Seller
+                                            <input type="checkbox" name="verified_seller" @if(isset($_GET['verified_seller']) && $_GET['verified_seller'] == 'on') checked @endif> Verified Seller
                                         </label>
                                     </div>
                                 </div>
@@ -76,14 +80,17 @@
 
                         <div class="col-md-12" style="margin-top:20px ">
                             <div class="search-row pull-right">
-                                <button type="button" class="btn btn-info">Search</button>
-                                <button type="button" class="btn btn-info">Reset</button>
+                                <button type="submit" class="btn btn-info">Search</button>
+                                <a href="{{ url('products') }}" class="btn btn-danger">Reset</a>
                             </div>
                         </div>
                     </form>
                 </div>
             </div>
 
+            {{-- end filter --}}
+
+            {{-- short filter --}}
             <div class="col-md-12  clear">
                 <div class="col-xs-10 page-subheader sorting pl0">
                     <ul class="sort-by-list">
@@ -116,272 +123,61 @@
                 </div><!--/ .layout-switcher-->
             </div>
 
-            <div class="col-md-12 clear ">
+
+            {{-- items list --}}
+            <div class="col-md-12 clear">
                 <div id="list-type" class="proerty-th">
-                    <div class="col-sm-6 col-md-3 p0">
-                        <div class="box-two proerty-item">
-                            <div class="item-thumb">
-                                <a href="property-1.html" ><img src="Frontend/assets/img/demo/property-3.jpg"></a>
-                            </div>
+                    @if (!empty($items))
+                        @foreach ($items as $item)
+                            <div class="col-sm-6 col-md-3 p0 mt-3">
+                                <div class="box-two proerty-item">
+                                    <div class="item-thumb">
+                                        <a href="{{ url('product-detail', $item->id) }}" target="_blank"><img
+                                                src="{{ $item->itemImage[0]->image }}"></a>
+                                    </div>
 
-                            <div class="item-entry overflow">
-                                <h5><a href="property-1.html"> Super nice villa </a></h5>
-                                <div class="dot-hr"></div>
-                                <span class="pull-left"><b> Area :</b> 120m </span>
-                                <span class="proerty-price pull-right"> $ 300,000</span>
-                                <p style="display: none;">Suspendisse ultricies Suspendisse ultricies Nulla quis dapibus nisl. Suspendisse ultricies commodo arcu nec pretium ...</p>
-                                <div class="property-icon">
-                                    <img src="Frontend/assets/img/icon/bed.png">(5)|
-                                    <img src="Frontend/assets/img/icon/shawer.png">(2)|
-                                    <img src="Frontend/assets/img/icon/cars.png">(1)
-                                </div>
+                                    <div class="item-entry overflow">
+                                        <h5><a href="{{ url('product-detail', $item->id) }}"> {{ $item->item_title }}</a></h5>
+                                        <div class="dot-hr"></div>
+                                        <span class="pull-left"><b> Category :</b>
+                                            {{ $item->category->category_name }}
+                                        </span>
+                                        <span class="proerty-price pull-right">Rs:
+                                            {{ $item->buy_it_now_price }}</span>
+                                        <div class="property-icon"
+                                            style="height: 60px !important;overflow: hidden;">
+                                            <span class="pull-left">
+                                            <small style="margin-left: 5px;">Type: {{ $item->sale_type == 'buy_it_now' ? 'Fixed Price' : 'Bidding' }}</small></span>
 
-                                <div class="dealer-action pull-right">                                        
-                                    <a href="submit-property.html" class="button">Edit </a>
-                                    <a href="#" class="button delete_user_car">Delete</a>
-                                    <a href="property-1.html" class="button">View</a>
-                                </div>
-                            </div>
+                                            <span class="pull-right">Condication:
+                                                {{ $item->condition == 'new' ? 'New' : 'Used' }}</span>
+                                        </div>
+                                    </div>
 
 
-                        </div>
-                    </div>
-
-                    <div class="col-sm-6 col-md-3 p0">
-                        <div class="box-two proerty-item">
-                            <div class="item-thumb">
-                                <a href="property-1.html" ><img src="Frontend/assets/img/demo/property-2.jpg"></a>
-                            </div>
-
-                            <div class="item-entry overflow">
-                                <h5><a href="property-1.html"> Super nice villa </a></h5>
-                                <div class="dot-hr"></div>
-                                <span class="pull-left"><b> Area :</b> 120m </span>
-                                <span class="proerty-price pull-right"> $ 300,000</span>
-                                <p style="display: none;">Suspendisse ultricies Suspendisse ultricies Nulla quis dapibus nisl. Suspendisse ultricies commodo arcu nec pretium ...</p>
-                                <div class="property-icon">
-                                    <img src="Frontend/assets/img/icon/bed.png">(5)|
-                                    <img src="Frontend/assets/img/icon/shawer.png">(2)|
-                                    <img src="Frontend/assets/img/icon/cars.png">(1)
                                 </div>
                             </div>
-
-
-                        </div>
-                    </div>
-
-                    <div class="col-sm-6 col-md-3 p0">
-                        <div class="box-two proerty-item proerty-item-ads">
-                            <a href="" ><img src="Frontend/assets/img/pro-ads.jpg"></a>
-                        </div>
-                    </div>
-
-                    <div class="col-sm-6 col-md-3 p0">
-                        <div class="box-two proerty-item">
-                            <div class="item-thumb">
-                                <a href="property-1.html" ><img src="Frontend/assets/img/demo/property-3.jpg"></a>
-                            </div>
-
-                            <div class="item-entry overflow">
-                                <h5><a href="property-1.html"> Super nice villa </a></h5>
-                                <div class="dot-hr"></div>
-                                <span class="pull-left"><b> Area :</b> 120m </span>
-                                <span class="proerty-price pull-right"> $ 300,000</span>
-                                <p style="display: none;">Suspendisse ultricies Suspendisse ultricies Nulla quis dapibus nisl. Suspendisse ultricies commodo arcu nec pretium ...</p>
-                                <div class="property-icon">
-                                    <img src="Frontend/assets/img/icon/bed.png">(5)|
-                                    <img src="Frontend/assets/img/icon/shawer.png">(2)|
-                                    <img src="Frontend/assets/img/icon/cars.png">(1)
-                                </div>
-                            </div>
-
-
-                        </div>
-                    </div>
-
-                    <div class="col-sm-6 col-md-3 p0">
-                        <div class="box-two proerty-item">
-                            <div class="item-thumb">
-                                <a href="property-1.html" ><img src="Frontend/assets/img/demo/property-1.jpg"></a>
-                            </div>
-
-                            <div class="item-entry overflow">
-                                <h5><a href="property-1.html"> Super nice villa </a></h5>
-                                <div class="dot-hr"></div>
-                                <span class="pull-left"><b> Area :</b> 120m </span>
-                                <span class="proerty-price pull-right"> $ 300,000</span>
-                                <p style="display: none;">Suspendisse ultricies Suspendisse ultricies Nulla quis dapibus nisl. Suspendisse ultricies commodo arcu nec pretium ...</p>
-                                <div class="property-icon">
-                                    <img src="Frontend/assets/img/icon/bed.png">(5)|
-                                    <img src="Frontend/assets/img/icon/shawer.png">(2)|
-                                    <img src="Frontend/assets/img/icon/cars.png">(1)
-                                </div>
-                            </div>
-
-
-                        </div>
-                    </div>
-
-                    <div class="col-sm-6 col-md-3 p0">
-                        <div class="box-two proerty-item">
-                            <div class="item-thumb">
-                                <a href="property-1.html" ><img src="Frontend/assets/img/demo/property-2.jpg"></a>
-                            </div>
-
-                            <div class="item-entry overflow">
-                                <h5><a href="property-1.html"> Super nice villa </a></h5>
-                                <div class="dot-hr"></div>
-                                <span class="pull-left"><b> Area :</b> 120m </span>
-                                <span class="proerty-price pull-right"> $ 300,000</span>
-                                <p style="display: none;">Suspendisse ultricies Suspendisse ultricies Nulla quis dapibus nisl. Suspendisse ultricies commodo arcu nec pretium ...</p>
-                                <div class="property-icon">
-                                    <img src="Frontend/assets/img/icon/bed.png">(5)|
-                                    <img src="Frontend/assets/img/icon/shawer.png">(2)|
-                                    <img src="Frontend/assets/img/icon/cars.png">(1)
-                                </div>
-                            </div>
-
-
-                        </div>
-                    </div>
-
-                    <div class="col-sm-6 col-md-3 p0">
-                        <div class="box-two proerty-item">
-                            <div class="item-thumb">
-                                <a href="property-1.html" ><img src="Frontend/assets/img/demo/property-3.jpg"></a>
-                            </div>
-
-                            <div class="item-entry overflow">
-                                <h5><a href="property-1.html"> Super nice villa </a></h5>
-                                <div class="dot-hr"></div>
-                                <span class="pull-left"><b> Area :</b> 120m </span>
-                                <span class="proerty-price pull-right"> $ 300,000</span>
-                                <p style="display: none;">Suspendisse ultricies Suspendisse ultricies Nulla quis dapibus nisl. Suspendisse ultricies commodo arcu nec pretium ...</p>
-                                <div class="property-icon">
-                                    <img src="Frontend/assets/img/icon/bed.png">(5)|
-                                    <img src="Frontend/assets/img/icon/shawer.png">(2)|
-                                    <img src="Frontend/assets/img/icon/cars.png">(1)
-                                </div>
-                            </div>
-
-
-                        </div>
-                    </div>
-
-                    <div class="col-sm-6 col-md-3 p0">
-                        <div class="box-two proerty-item">
-                            <div class="item-thumb">
-                                <a href="property-1.html" ><img src="Frontend/assets/img/demo/property-2.jpg"></a>
-                            </div>
-
-                            <div class="item-entry overflow">
-                                <h5><a href="property-1.html"> Super nice villa </a></h5>
-                                <div class="dot-hr"></div>
-                                <span class="pull-left"><b> Area :</b> 120m </span>
-                                <span class="proerty-price pull-right"> $ 300,000</span>
-                                <p style="display: none;">Suspendisse ultricies Suspendisse ultricies Nulla quis dapibus nisl. Suspendisse ultricies commodo arcu nec pretium ...</p>
-                                <div class="property-icon">
-                                    <img src="Frontend/assets/img/icon/bed.png">(5)|
-                                    <img src="Frontend/assets/img/icon/shawer.png">(2)|
-                                    <img src="Frontend/assets/img/icon/cars.png">(1)
-                                </div>
-                            </div>
-
-
-                        </div>
-                    </div>
-
-                    <div class="col-sm-6 col-md-3 p0">
-                        <div class="box-two proerty-item">
-                            <div class="item-thumb">
-                                <a href="property-1.html" ><img src="Frontend/assets/img/demo/property-1.jpg"></a>
-                            </div>
-
-                            <div class="item-entry overflow">
-                                <h5><a href="property-1.html"> Super nice villa </a></h5>
-                                <div class="dot-hr"></div>
-                                <span class="pull-left"><b> Area :</b> 120m </span>
-                                <span class="proerty-price pull-right"> $ 300,000</span>
-                                <p style="display: none;">Suspendisse ultricies Suspendisse ultricies Nulla quis dapibus nisl. Suspendisse ultricies commodo arcu nec pretium ...</p>
-                                <div class="property-icon">
-                                    <img src="Frontend/assets/img/icon/bed.png">(5)|
-                                    <img src="Frontend/assets/img/icon/shawer.png">(2)|
-                                    <img src="Frontend/assets/img/icon/cars.png">(1)
-                                </div>
-                            </div>
-
-
-                        </div>
-                    </div>
-
-                    <div class="col-sm-6 col-md-3 p0">
-                        <div class="box-two proerty-item proerty-item-ads">
-                            <a href="" ><img src="Frontend/assets/img/pro-ads.jpg"></a>
-                        </div>
-                    </div>
-
-                    <div class="col-sm-6 col-md-3 p0">
-                        <div class="box-two proerty-item">
-                            <div class="item-thumb">
-                                <a href="property-1.html" ><img src="Frontend/assets/img/demo/property-2.jpg"></a>
-                            </div>
-
-                            <div class="item-entry overflow">
-                                <h5><a href="property-1.html"> Super nice villa </a></h5>
-                                <div class="dot-hr"></div>
-                                <span class="pull-left"><b> Area :</b> 120m </span>
-                                <span class="proerty-price pull-right"> $ 300,000</span>
-                                <p style="display: none;">Suspendisse ultricies Suspendisse ultricies Nulla quis dapibus nisl. Suspendisse ultricies commodo arcu nec pretium ...</p>
-                                <div class="property-icon">
-                                    <img src="Frontend/assets/img/icon/bed.png">(5)|
-                                    <img src="Frontend/assets/img/icon/shawer.png">(2)|
-                                    <img src="Frontend/assets/img/icon/cars.png">(1)
-                                </div>
-                            </div>
-
-
-                        </div>
-                    </div>
-
-                    <div class="col-sm-6 col-md-3 p0">
-                        <div class="box-two proerty-item">
-                            <div class="item-thumb">
-                                <a href="property-1.html" ><img src="Frontend/assets/img/demo/property-1.jpg"></a>
-                            </div>
-
-                            <div class="item-entry overflow">
-                                <h5><a href="property-1.html"> Super nice villa </a></h5>
-                                <div class="dot-hr"></div>
-                                <span class="pull-left"><b> Area :</b> 120m </span>
-                                <span class="proerty-price pull-right"> $ 300,000</span>
-                                <p style="display: none;">Suspendisse ultricies Suspendisse ultricies Nulla quis dapibus nisl. Suspendisse ultricies commodo arcu nec pretium ...</p>
-                                <div class="property-icon">
-                                    <img src="Frontend/assets/img/icon/bed.png">(5)|
-                                    <img src="Frontend/assets/img/icon/shawer.png">(2)|
-                                    <img src="Frontend/assets/img/icon/cars.png">(1)
-                                </div>
-                            </div>
-
-
-                        </div>
-                    </div>
+                        @endforeach
+                    @endif
                 </div>
             </div>
 
+            {{-- end items list --}}
+
+
+            {{-- start pagination --}}
             <div class="col-md-12 clear">
                 <div class="pull-right">
-                    <div class="pagination">
-                        <ul>
-                            <li><a href="#">Prev</a></li>
-                            <li><a href="#">1</a></li>
-                            <li><a href="#">2</a></li>
-                            <li><a href="#">3</a></li>
-                            <li><a href="#">4</a></li>
-                            <li><a href="#">Next</a></li>
-                        </ul>
-                    </div>
+                    @if(!empty($items) && count($items) > 0)
+                        <div class="card">
+                            {{ $items->links() }}
+                        </div>
+                    @endif
                 </div>
             </div>
+            {{-- end pagination --}}
+
+
         </div>
     </div>
 </div>

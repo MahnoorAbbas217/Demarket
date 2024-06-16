@@ -2209,7 +2209,7 @@ proerty-th
     position: relative;
     width: 100%;
     opacity: 0.7;
-    min-height: 225px;
+    min-height: 265px;
     max-height: 265px;
 }
 
@@ -3862,4 +3862,15 @@ ul.footer-blog li {
 
 .text-white {
     color: white;
+}
+
+.p3 {
+    padding: 10px;
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.card nav div a {
+    border: 1px solid;
+    padding: 10px;
 }

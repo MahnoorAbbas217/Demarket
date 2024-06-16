@@ -65,7 +65,14 @@
                             </div>
 
                             <ul id="image-gallery" class="gallery list-unstyled cS-hidden">
-                                <li data-thumb="{{ asset('Frontend/assets/img/property-1/property1.jpg') }}">
+                                @if(!empty($itemDetail->itemImage) && count($itemDetail->itemImage) > 0)
+                                    @foreach($itemDetail->itemImage as $itemImage)
+                                        <li data-thumb="{{ asset($itemImage->image) }}">
+                                            <img src="{{ asset($itemImage->image) }}" />
+                                        </li>
+                                    @endforeach
+                                @endif
+                                {{-- <li data-thumb="{{ asset('Frontend/assets/img/property-1/property1.jpg') }}">
                                     <img src="{{ asset('Frontend/assets/img/property-1/property1.jpg') }}" />
                                 </li>
                                 <li data-thumb="{{ asset('Frontend/assets/img/property-1/property2.jpg') }}">
@@ -76,7 +83,7 @@
                                 </li>
                                 <li data-thumb="{{ asset('Frontend/assets/img/property-1/property4.jpg') }}">
                                     <img src="{{ asset('Frontend/assets/img/property-1/property4.jpg') }}" />
-                                </li>
+                                </li> --}}
                             </ul>
                         </div>
                     </div>
@@ -84,10 +91,10 @@
 
                 <div class="single-property-wrapper">
                     <div class="single-property-header">
-                        <h1 class="property-title pull-left">Villa in Coral Gables</h1>
+                        <h1 class="property-title pull-left">{{ $itemDetail->item_title }}</h1>
 
                         <!-- End features area  -->
-                        <span class="property-price pull-right">Rs 825,000</span>
+                        <span class="property-price pull-right">Rs {{ $itemDetail->buy_it_now_price }}</span>
                     </div>
 
                     <div class="section property-features">
@@ -103,86 +110,12 @@
 
                     </div>
 
-                    {{-- <div class="property-meta entry-meta clearfix ">
-
-                        <div class="col-xs-6 col-sm-3 col-md-3 p-b-15">
-                            <span class="property-info-icon icon-tag">
-                                <img src="assets/img/icon/sale-orange.png">
-                            </span>
-                            <span class="property-info-entry">
-                                <span class="property-info-label">Status</span>
-                                <span class="property-info-value">For Sale</span>
-                            </span>
-                        </div>
-
-                        <div class="col-xs-6 col-sm-3 col-md-3 p-b-15">
-                            <span class="property-info icon-area">
-                                <img src="assets/img/icon/room-orange.png">
-                            </span>
-                            <span class="property-info-entry">
-                                <span class="property-info-label">Area</span>
-                                <span class="property-info-value">3500<b class="property-info-unit">Sq Ft</b></span>
-                            </span>
-                        </div>
-
-                        <div class="col-xs-6 col-sm-3 col-md-3 p-b-15">
-                            <span class="property-info-icon icon-bed">
-                                <img src="assets/img/icon/bed-orange.png">
-                            </span>
-                            <span class="property-info-entry">
-                                <span class="property-info-label">Bedrooms</span>
-                                <span class="property-info-value">3</span>
-                            </span>
-                        </div>
-
-                        <div class="col-xs-6 col-sm-3 col-md-3 p-b-15">
-                            <span class="property-info-icon icon-bed">
-                                <img src="assets/img/icon/cars-orange.png">
-                            </span>
-                            <span class="property-info-entry">
-                                <span class="property-info-label">Car garages</span>
-                                <span class="property-info-value">1</span>
-                            </span>
-                        </div>
-
-                        <div class="col-xs-6 col-sm-3 col-md-3 p-b-15">
-                            <span class="property-info-icon icon-bath">
-                                <img src="assets/img/icon/os-orange.png">
-                            </span>
-                            <span class="property-info-entry">
-                                <span class="property-info-label">Bathrooms</span>
-                                <span class="property-info-value">3.5</span>
-                            </span>
-                        </div>
-
-                        <div class="col-xs-6 col-sm-3 col-md-3 p-b-15">
-                            <span class="property-info-icon icon-garage">
-                                <img src="assets/img/icon/room-orange.png">
-                            </span>
-                            <span class="property-info-entry">
-                                <span class="property-info-label">Garages</span>
-                                <span class="property-info-value">2</span>
-                            </span>
-                        </div>
-
-                        <div class="col-xs-6 col-sm-3 col-md-3 p-b-15">
-                            <span class="property-info-icon icon-garage">
-                                <img src="assets/img/icon/shawer-orange.png">
-                            </span>
-                            <span class="property-info-entry">
-                                <span class="property-info-label">Garages</span>
-                                <span class="property-info-value">2</span>
-                            </span>
-                        </div>
-
-
-                    </div> --}}
                     <!-- .property-meta -->
 
                     <div class="section">
                         <h4 class="s-property-title">Short Description</h4>
                         <div class="s-property-content">
-                            <p>Nulla quis dapibus nisl. Suspendisse ultricies Nulla quis dapibus nisl. Suspendisse ultricies commodo arcu nec pretium. Nullam sed arcu ultricies commodo arcu nec pretium. Nullam sed arcu ultricies Nulla quis dapibus nisl. Suspendisse ultricies commodo arcu nec pretium. Nullam sed arcu ultricies Nulla quis dapibus nisl. Suspendisse ultricies commodo arcu nec pretium. Nullam sed arcu ultricies                                </p>
+                            <p>{{ $itemDetail->short_description }}</p>
                         </div>
                     </div>
                     <!-- End description area  -->
@@ -192,7 +125,15 @@
                         <h4 class="s-property-title">Additional Details</h4>
 
                         <ul class="additional-details-list clearfix">
-                            <li>
+                            @if(!empty($itemDetail->itemAdditionalInformation) && count($itemDetail->itemAdditionalInformation) > 0)
+                                @foreach($itemDetail->itemAdditionalInformation as $additionalInformation)
+                                    <li>
+                                        <span class="col-xs-6 col-sm-4 col-md-4 add-d-title">{{ $additionalInformation->title }}</span>
+                                        <span class="col-xs-6 col-sm-8 col-md-8 add-d-entry">{{ $additionalInformation->value }}</span>
+                                    </li>
+                                @endforeach
+                            @endif
+                            {{-- <li>
                                 <span class="col-xs-6 col-sm-4 col-md-4 add-d-title">Waterfront</span>
                                 <span class="col-xs-6 col-sm-8 col-md-8 add-d-entry">Yes</span>
                             </li>
@@ -219,7 +160,7 @@
                             <li>
                                 <span class="col-xs-6 col-sm-4 col-md-4 add-d-title">Waterfront Description:</span>
                                 <span class="col-xs-6 col-sm-8 col-md-8 add-d-entry">Intracoastal Front,Ocean Access</span>
-                            </li>
+                            </li> --}}
 
                         </ul>
                     </div>
@@ -374,13 +315,13 @@
 
                                 <div class="clear">
                                     <div class="col-xs-4 col-sm-4 dealer-face">
-                                        <a href="">
-                                            <img src="{{ asset('Frontend/assets/img/client-face1.png') }}" class="img-circle">
+                                        <a >
+                                            <img src="{{ asset($itemDetail->user->profile_image) }}" class="img-circle">
                                         </a>
                                     </div>
                                     <div class="col-xs-8 col-sm-8 ">
                                         <h3 class="dealer-name">
-                                            <a href="#">Nathan James</a>
+                                            <a href="#">{{ $itemDetail->user->name }}</a>
                                             <p><i class="fa fa-star text-warning"></i> (3.9)</p>
                                         </h3>
 
@@ -389,15 +330,15 @@
                                     <div class="dealer-social-media">
                                         <div class="row text-center" style="margin-top: 30px !important">
                                             <div class="col-sm-2">
-                                                <i class="pe-7s-mail strong" style="font-size: 15px"> </i>Verified
+                                                <i class="pe-7s-mail strong" style="font-size: 15px"> </i> @if($itemDetail->user->email_verified_at != '') Verified @else Not Verified @endif
                                             </div>
 
                                             <div class="col-sm-2">
-                                                <i class="pe-7s-call strong" style="font-size: 15px"> </i>Verified
+                                                <i class="pe-7s-call strong" style="font-size: 15px"> </i>@if($itemDetail->user->mobile_no_verified_at != '') Verified @else Not Verified @endif
                                             </div>
 
                                             <div class="col-sm-2">
-                                                <i class="pe-7s-user strong" style="font-size: 18px"> </i>Verified
+                                                <i class="pe-7s-user strong" style="font-size: 18px"> </i>@if($itemDetail->user->identity_verified_at != '') Verified @else Not Verified @endif
                                             </div>
                                         </div>
                                     </div>
@@ -406,7 +347,7 @@
 
 
                                 <div class="clear text-center" style="margin-top: 20px">
-                                    <a href="{{ url('store') }}" class="btn btn-info btn-sm">Visit Store</a>
+                                    <a href="{{ url('store/'.$itemDetail->user->store_slug.'?from=product') }}" class="btn btn-info btn-sm">Visit Store</a>
                                     <a href="#" class="btn btn-success btn-sm">Contact Seller</a>
                                 </div>
 

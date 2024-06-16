@@ -10,57 +10,30 @@ use Illuminate\Support\Facades\Auth;
 class ItemController extends Controller
 {
     function index() {
-        $items = Item::select('id', 'created_by', 'item_title','category_id', 'sub_category_id', 'condition', 'sale_type', 'auction_duration', 'buy_it_now_price', 'start_bidding_price', 'quantity', 'shipping_price')->orderBy('created_at', 'DESC')->with(['category' => function($query) {
-            $query->select('id','category_name');
-        }, 'subCategory'  => function($query) {
-            $query->select('id','sub_category_name');
-        }, 'user'  => function($query) {
-            $query->select('id','name', 'profile_image', 'store_slug');
-        }, 'itemImage' => function($query) {
-            $query->select('id','item_id', 'image');
-        },
-        ])->paginate(20);
+        $getItems = Item::select('id', 'created_by', 'item_title','category_id', 'sub_category_id', 'condition', 'sale_type', 'auction_duration', 'buy_it_now_price', 'start_bidding_price', 'quantity', 'shipping_price')->orderBy('created_at', 'DESC')->withActiveCategory()->withActiveSubCategory()->withActiveUser()
+        ->with(['category', 'subCategory', 'user', 'itemImage']);
 
 
-        $randomItems = Item::select('id', 'created_by', 'item_title','category_id', 'sub_category_id', 'condition', 'sale_type', 'auction_duration', 'buy_it_now_price', 'start_bidding_price', 'quantity', 'shipping_price')->orderBy('created_at', 'DESC')->inRandomOrder()->with(['category' => function($query) {
-            $query->select('id','category_name');
-        }, 'subCategory'  => function($query) {
-            $query->select('id','sub_category_name');
-        }, 'user'  => function($query) {
-            $query->select('id','name', 'profile_image', 'store_slug');
-        }, 'itemImage' => function($query) {
-            $query->select('id','item_id', 'image');
-        },
-        ])->paginate(10);
+        $items = $getItems->paginate(20);
+        $randomItems = $getItems->inRandomOrder()->paginate(10);
 
         $data['items'] = $items;
         $data['randomItems'] = $randomItems;
 
         return response()->json([
             'success' => true,
-            'data'    => $data,
-            'message' => 'Items 20 values order by desc',
+            'data'    => $randomItems,
+            'message' => 'Items 20 Items & 10 random Items order by desc',
         ], 200);
     }
 
     function show($item_id) {
-        $item = Item::where('id', $item_id)->with(['category' => function($query) {
-            $query->select('id','category_name');
-        }, 'subCategory'  => function($query) {
-            $query->select('id','sub_category_name');
-        }, 'user' => function($query) {
-            $query->select('id','name', 'profile_image', 'store_slug', 'email_verified_at', 'mobile_no_verified_at', 'city_name', 'identity_verified_at');
-        },  'itemImage' => function($query) {
-            $query->select('id','item_id', 'image');
-        }, 'itemAdditionalInformation' => function($query) {
-            $query->select('id','item_id', 'title', 'value');
-        },
-        ])->first();
+        $item = Item::where('id', $item_id)->with(['category', 'subCategory', 'user', 'itemImage'])->first();
 
         return response()->json([
             'success' => true,
             'data'    => $item,
-            'message' => 'specific item detail with category, subcategory, user',
+            'message' => 'specific item detail with category, subcategory, user, itemimages, item additionalInformation',
         ], 200);
     }
 
@@ -82,18 +55,7 @@ class ItemController extends Controller
             $message = 'my unsold items';
         }
         
-        $items = $items->with(['category' => function($query) {
-            $query->select('id','category_name');
-        }, 'subCategory'  => function($query) {
-            $query->select('id','sub_category_name');
-        }, 'user' => function($query) {
-            $query->select('id','name', 'profile_image', 'store_slug', 'email_verified_at', 'mobile_no_verified_at', 'city_name', 'identity_verified_at');
-        },  'itemImage' => function($query) {
-            $query->select('id','item_id', 'image');
-        }, 'itemAdditionalInformation' => function($query) {
-            $query->select('id','item_id', 'title', 'value');
-        },
-        ])->get();
+        $items = $items->with(['category', 'subCategory', 'user', 'itemImage'])->get();
 
         return response()->json([
             'success' => true,

@@ -140,6 +140,7 @@
                                                 <ul>
                                                     <li><a href="{{ url('messages') }}">Messages</a> </li>
                                                     <li><a href="{{ url('profile') }}">Profile</a> </li>
+                                                    <li><a href="{{ url('identity-verification') }}">Identity Verification</a> </li>
                                                     <li><a href="{{ url('setting') }}">Setting</a> </li>
                                                     <li><a href="{{ url('membership') }}">Membership</a> </li>
                                                     <li><a href="{{ url('change-password') }}">Change Password</a> </li>
