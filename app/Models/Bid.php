@@ -14,10 +14,10 @@ class Bid extends Model
 
     protected $fillable = [
         'created_by',
-        'item_id',     
+        'item_id',
         'item_detail',
         'orignal_price',
-        'bid_price',     
+        'bid_price',
         'bid_status',
     ];
 
@@ -28,7 +28,7 @@ class Bid extends Model
     public function scopeWithActiveItem($query)
     {
         return $query->whereHas('item', function ($query) {
-            $query->whereNull('deleted_at');
+            $query->whereNull('deleted_at')->where('publication_status', 'active');
         });
     }
 

@@ -41,9 +41,10 @@ Route::middleware('auth')->group(function(){
 
     Route::get('recently-viewed', [App\Http\Controllers\RecentlyViewedContoller::class, 'index']);
 
-    Route::get('saved-items', function () {
-        return view('Customer.saved_items');
-    });
+    // Route::get('saved-items', function () {
+    //     return view('Customer.saved_items');
+    // });
+    Route::get('saved-items',  [App\Http\Controllers\SavedItemControler::class, 'mySavedItems']);
 
     Route::get('cart', function () {
         return view('Customer.cart');
@@ -70,7 +71,7 @@ Route::middleware('auth')->group(function(){
     Route::get('profile', function () {
         return view('Profile.profile');
     });
-    Route::post('/update-profile/{id}',  [App\Http\Controllers\ProfileContoller::class, 'update'])->name('update.profile');
+    Route::post('/update-profile/{id}',  [App\Http\Controllers\ProfileContoller::class, 'update']);
 
     Route::get('identity-verification', function () {
         return view('Profile.identity_verification');

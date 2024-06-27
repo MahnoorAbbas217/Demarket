@@ -25,7 +25,7 @@ class RecentlyViewed extends Model
     public function scopeWithActiveItem($query)
     {
         return $query->whereHas('item', function ($query) {
-            $query->whereNull('deleted_at');
+            $query->whereNull('deleted_at')->where('publication_status', 'active');
         });
     }
 }
