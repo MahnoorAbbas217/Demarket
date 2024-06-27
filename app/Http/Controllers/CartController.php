@@ -7,6 +7,13 @@ use Illuminate\Http\Request;
 
 class CartController extends Controller
 {
+
+    function myCart() {
+        $myCarts = Cart::where('created_by', loginUserId())->WithActiveItem()->get();
+
+        return view('Customer.cart', compact('myCarts'));
+    }
+
     function addToCart(Request $request) {
         $request->validate([
             'item_id' => 'required|exists:items,id',
@@ -38,5 +45,42 @@ class CartController extends Controller
             'message', 'Item Added To Cart Successfully!',
         ]);
 
+    }
+
+    function removeItemFromCart($cart_id) {
+        $checkCart = Cart::where('created_by', loginUserId())->where('id', $cart_id)->first();
+
+        if(!empty($checkCart)){
+            $checkCart->delete();
+
+            return response()->json([
+                'status', 200,
+                'message', 'Item Removed From Cart Successfully!',
+            ]);
+        }
+
+        return response()->json([
+            'status', 201,
+            'message', 'Cart User not Valid!',
+        ]);
+    }
+
+    function updateCartQuantity(Request $request, $cart_id, $action) {
+        $checkCart = Cart::where('created_by', loginUserId())->where('id', $cart_id)->first();
+
+        if(!empty($checkCart)){
+            $checkCart->quantity = $request->quantity;
+            $checkCart->update();
+
+            return response()->json([
+                'status', 200,
+                'message', 'Item Quantity Updated Successfully!',
+            ]);
+        }
+
+        return response()->json([
+            'status', 201,
+            'message', 'Cart User not Valid!',
+        ]);
     }
 }

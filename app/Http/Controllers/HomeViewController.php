@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use App\Models\Item;
+use App\Models\Slider;
 use Illuminate\Http\Request;
 
 class HomeViewController extends Controller
@@ -15,7 +16,9 @@ class HomeViewController extends Controller
         $recommendedItems = $recommendedItemsQuery->paginate(15);
         $randomItems = $randomItemsQuery->inRandomOrder()->paginate(8);
 
-        return view('Pages.home', compact('recommendedItems', 'randomItems'));
+        $sliders = Slider::all();
+
+        return view('Pages.home', compact('recommendedItems', 'randomItems', 'sliders'));
     }
 
     function items(Request $request) {

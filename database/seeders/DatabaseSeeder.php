@@ -41,7 +41,7 @@ class DatabaseSeeder extends Seeder
         // Cart::factory(40)->create();
         // RecentlyViewed::factory(40)->create();
         // SavedItem::factory(40)->create();
-        Bid::factory(40)->create();
+        // Bid::factory(40)->create();
 
         Slider::factory(4)->create();
 

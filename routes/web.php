@@ -46,10 +46,13 @@ Route::middleware('auth')->group(function(){
     // });
     Route::get('saved-items',  [App\Http\Controllers\SavedItemControler::class, 'mySavedItems']);
 
-    Route::get('cart', function () {
-        return view('Customer.cart');
-    });
+    // Route::get('cart', function () {
+    //     return view('Customer.cart');
+    // });
+    Route::get('cart', [App\Http\Controllers\CartController::class, 'myCart']);
     Route::post('add-to-cart/{item_id}', [App\Http\Controllers\CartController::class, 'addToCart']);
+    Route::post('remove-item-from-cart/{cart_id}', [App\Http\Controllers\CartController::class, 'removeItemFromCart']);
+    Route::post('update-cart-quantity/{cart_id}/{action}', [App\Http\Controllers\CartController::class, 'updateCartQuantity']);
 
 
     // Route::get('bids', function () {

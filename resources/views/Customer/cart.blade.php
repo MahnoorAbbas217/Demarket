@@ -124,32 +124,33 @@
                 <h3 class="card-title">Cart</h3>
             </div>
 
-            @for($i = 1; $i < 9; $i++)
-                <div class="col-md-12">
-                    <div id="list-type" class="proerty-th-list">
-
-
-                    <div class="cart-item">
-                        <img src="{{ asset('uploads/ad/ad-default.png') }}" alt="Product Image" class="product-image">
-                        <div class="product-details">
-                            <h2 class="product-title">Title</h2>
-                            <p class="product-category">Category</p>
-                        </div>
-                        <div class="quantity-controls">
-                            <button class="quantity-btn minus-btn">-</button>
-                            <input type="number" class="quantity-input" value="1" min="1">
-                            <button class="quantity-btn plus-btn">+</button>
-                        </div>
-                        {{-- <h2 class="product-title">Price: </h2> --}}
-                        <h2 class="product-amount">$<span>10.00</span></h2>
-                        {{-- <h2 class="product-title">Total Amount: </h2> --}}
-                        <h2 class="product-amount">$<span class="amount">10.00</span></h2>
-                        <button class="delete-btn"><i class="fas fa-trash-alt"></i></button>
+            @if(!empty($myCarts))
+    @foreach($myCarts as $key => $cart)
+        <div class="col-md-12">
+            <div id="list-type" class="proerty-th-list">
+                <div class="cart-item" data-cart-id="{{ $cart->id }}">
+                    <img src="{{ asset($cart->item->itemImage[0]->image) }}" alt="Product Image" class="product-image">
+                    <div class="product-details">
+                        <h2 class="product-title"><a href="{{ url('product-detail', $cart->item->id) }}">{{ $cart->item->item_title }}</a></h2>
+                        <p class="product-category">{{ $cart->item->category->category_name }}</p>
                     </div>
+                    <div class="quantity-controls">
+                        <input type="hidden" value="{{ csrf_token() }}" id="_token">
+                        <input type="hidden" value="{{ $cart->item->buy_it_now_price }}" class="buy_it_now_price">
+                        <input type="hidden" value="{{ $cart->id }}" class="cart-id">
+                        <button class="quantity-btn cart-quantity-btn minus-btn" data-action="minus">-</button>
+                        <input type="number" class="quantity-input" value="{{ $cart->quantity }}" min="1" readonly>
+                        <button class="quantity-btn cart-quantity-btn plus-btn" data-action="plus">+</button>
+                    </div>
+                    <h2 class="product-amount">{{ env('CurrencySymbol') }}<span>{{ $cart->item->buy_it_now_price }}</span></h2>
+                    <h2 class="product-amount">{{ env('CurrencySymbol') }}<span class="amount">{{ $cart->item->buy_it_now_price * $cart->quantity }}</span></h2>
+                    <button class="delete-btn cart-delete-btn" data-action="remove"><i class="fas fa-trash-alt"></i></button>
                 </div>
+            </div>
+        </div>
+    @endforeach
+@endif
 
-                </div>
-                    @endfor
 
                 @if(!empty($myAds) && count($myAds) > 0)
                     <div class="card">
@@ -160,44 +161,11 @@
 
 
         </div>
+
+        <a href="#" class="btn btn-success align-right">Checkout</a>
+
         </div>
     </div>
 </div>
-
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-    const minusBtns = document.querySelectorAll('.minus-btn');
-    const plusBtns = document.querySelectorAll('.plus-btn');
-    const quantityInputs = document.querySelectorAll('.quantity-input');
-    const amountElements = document.querySelectorAll('.amount');
-    const unitPrice = 10.00; // Example unit price
-
-    minusBtns.forEach((btn, index) => {
-        btn.addEventListener('click', function() {
-            let quantity = quantityInputs[index].value;
-            if (quantity > 1) {
-                quantity--;
-                quantityInputs[index].value = quantity;
-                updateAmount(index, quantity);
-            }
-        });
-    });
-
-    plusBtns.forEach((btn, index) => {
-        btn.addEventListener('click', function() {
-            let quantity = quantityInputs[index].value;
-            quantity++;
-            quantityInputs[index].value = quantity;
-            updateAmount(index, quantity);
-        });
-    });
-
-    function updateAmount(index, quantity) {
-        let newAmount = (quantity * unitPrice).toFixed(2);
-        amountElements[index].textContent = newAmount;
-    }
-});
-
-</script>
 
 @endsection
