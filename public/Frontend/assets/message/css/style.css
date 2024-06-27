@@ -35,9 +35,12 @@
 }
 
 .message_container .left {
+    overflow: scroll;
+    max-height: 100% !important;
     float: left;
-    width: 37.6%;
-    height: 100%;
+    overflow-x: hidden !important;
+    max-width: 30%;
+    margin-right: 20px;
     border: 1px solid var(--light);
     background-color: var(--white);
 }
@@ -63,7 +66,7 @@
 
 .message_container .left input {
     float: left;
-    width: 188px;
+    width: 210px;
     height: 42px;
     padding: 0 15px;
     border: 1px solid var(--light);
@@ -139,7 +142,7 @@
 .message_container .left .people .person .time {
     font-size: 14px;
     position: absolute;
-    top: 16px;
+    top: 10px;
     right: 10%;
     padding: 0 0 5px 5px;
     color: var(--grey);
@@ -324,7 +327,7 @@
 }
 
 .message_container .right .write .write-link.send:before {
-    display: inline-block;
+    display: inline;
     float: left;
     width: 20px;
     height: 42px;

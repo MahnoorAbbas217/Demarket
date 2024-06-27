@@ -30,11 +30,11 @@ class HomeViewController extends Controller
         }
 
         if(isset($request->item_type_new) && $request->item_type_new != ''){
-            $items->where('condition', $request->item_type_new);
+            $items->where('condition', 'new');
         }
 
         if(isset($request->item_type_used) && $request->item_type_used != ''){
-            $items->where('condition', $request->item_type_used);
+            $items->where('condition', 'used');
         }
 
         if(isset($request->free_shipping) && $request->free_shipping != ''){
@@ -50,7 +50,7 @@ class HomeViewController extends Controller
         }
 
 
-        $items = $items->with(['itemImage', 'category', 'subCategory'])->withActiveCategory()->withActiveSubCategory()->WithActiveUser()->paginate(50);
+        $items = $items->with(['itemImage', 'category', 'subCategory'])->withActiveCategory()->withActiveSubCategory()->WithActiveUser()->paginate(30);
 
         $categories = Category::ActivePublication()->get();
 

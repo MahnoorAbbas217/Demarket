@@ -132,7 +132,7 @@
                             <div class="col-sm-6 col-md-3 p0 mt-3">
                                 <div class="box-two proerty-item">
                                     <div class="item-thumb">
-                                        <a href="{{ url('product-detail', $item->id) }}" target="_blank"><img
+                                        <a href="{{ url('product-detail', $item->id) }}"><img
                                                 src="{{ $item->itemImage[0]->image }}"></a>
                                     </div>
 
@@ -142,7 +142,7 @@
                                         <span class="pull-left"><b> Category :</b>
                                             {{ $item->category->category_name }}
                                         </span>
-                                        <span class="proerty-price pull-right">Rs:
+                                        <span class="proerty-price pull-right">{{ env('CurrencySymbol') }}:
                                             {{ $item->buy_it_now_price }}</span>
                                         <div class="property-icon"
                                             style="height: 60px !important;overflow: hidden;">

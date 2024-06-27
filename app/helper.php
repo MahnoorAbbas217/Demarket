@@ -13,6 +13,12 @@ function loginUserIdSlug(){
     return $data;
 }
 
+function loginUserId(){
+    $data = Auth::user()->id;
+
+    return $data;
+}
+
 function activePublication(){
     return ;
 }

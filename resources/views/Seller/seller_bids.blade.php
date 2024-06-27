@@ -118,7 +118,7 @@
                 <div class="col-md-12  pr0 padding-top-40 properties-page">
 
                     <div class="col-md-12">
-                        <h3 class="card-title">My Bids</h3>
+                        <h3 class="card-title">Item Bids</h3>
 
                         @if (Session::has('message'))
                             <p class="bg-info p3 mt-3 text-dark-bold">{{ Session::get('message') }}</p>
@@ -141,8 +141,8 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @if (!empty($bids))
-                                            @foreach ($bids as $bid)
+                                        @if (!empty($sellerBids))
+                                            @foreach ($sellerBids as $bid)
                                                 <tr>
                                                     <td>
                                                         <img src="{{ $bid->item->itemImage[0]->image }}" alt="Product Image"
@@ -165,7 +165,14 @@
                                                     </td>
                                                     <td>{{ $bid->bid_status }}</td>
                                                     <td>
-                                                        <a href="#" class="btn btn-info @if($bid->bid_status != 'accepted') text-danger @endif" @if($bid->bid_status != 'accepted') disabled="disabled" @endif>Pay Now</a>
+                                                        {{-- @if($bid->bid_status == 'pending') --}}
+                                                            <a @if(($bid->bid_status != 'pending' && $bid->bid_status != 'rejected') || $bid->bid_status == 'appected_and_paid') class="btn btn-success text-success" disabled="disabled" @else class="btn btn-success"  href="{{ url('bid-accepted',$bid->id) }}" @endif>Accepted</a>
+
+
+                                                            <a @if(($bid->bid_status != 'pending' && $bid->bid_status != 'accepted') || $bid->bid_status == 'appected_and_paid') class="btn btn-danger text-danger" disabled="disabled" @else class="btn btn-danger"  href="{{ url('bid-rejected',$bid->id) }}" @endif>Rejected</a>
+
+                                                            {{-- <a href="{{ url('bid-rejected',$bid->id) }}" class="btn btn-danger">Rejected</a> --}}
+                                                        {{-- @endif --}}
                                                     </td>
 
                                                 </tr>

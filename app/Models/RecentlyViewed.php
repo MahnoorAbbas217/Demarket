@@ -17,4 +17,15 @@ class RecentlyViewed extends Model
         'created_by',
         'item_id',
     ];
+
+    public function item(){
+        return $this->belongsTo(Item::class, 'item_id', 'id');
+    }
+
+    public function scopeWithActiveItem($query)
+    {
+        return $query->whereHas('item', function ($query) {
+            $query->whereNull('deleted_at');
+        });
+    }
 }

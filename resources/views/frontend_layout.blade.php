@@ -51,6 +51,7 @@
     {{-- ajax --}}
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
+
     </head>
     <body>
 
@@ -108,7 +109,7 @@
                                                 <h5>Selling</h5>
                                                 <ul>
                                                     <li>
-                                                        <a href="#">Sell an Item</a>
+                                                        <a href="{{ url('sell-item') }}">Sell an Item</a>
                                                     </li>
                                                     <li>
                                                         <a href="{{ url('my-items') }}">My Items</a>
@@ -119,6 +120,7 @@
                                                     <li>
                                                         <a href="{{ url('my-items?type=unsold') }}">Unsold Items</a>
                                                     </li>
+                                                    <li><a href="{{ url('bids') }}">Item Bids</a>  </li>
                                                     <li>
                                                         <a href="#">Payments</a>
                                                     </li>
@@ -127,7 +129,7 @@
                                             <div class="col-sm-4">
                                                 <h5>Buyer</h5>
                                                 <ul>
-                                                    <li><a href="{{ url('bids') }}">Bids</a>  </li>
+                                                    <li><a href="{{ url('buyer-bids') }}">My Bids</a>  </li>
                                                     <li><a href="{{ url('recently-viewed') }}">Rcently Viewed</a>  </li>
                                                     <li><a href="{{ url('saved-items') }}">Saved</a>  </li>
                                                     <li><a href="{{ url('purchase-history') }}">Purchase History</a>  </li>

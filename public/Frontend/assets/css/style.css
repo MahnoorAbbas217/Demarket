@@ -1862,13 +1862,13 @@ Asside widgets CSS
 
 .pagination ul {
     display: inline-block;
-    *display: inline;
+    display: inline;
     margin-bottom: 0;
     margin-left: 0;
     -webkit-border-radius: 3px;
     -moz-border-radius: 3px;
     border-radius: 3px;
-    *zoom: 1;
+    zoom: 1;
     -webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
     -moz-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
     box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
@@ -2646,7 +2646,7 @@ single property page
 }
 
 .dealer-widget {
-    background-color: #838383;
+    background-color: #000000;
     padding: 15px;
     color: #FFF;
     padding-bottom: 20px;
@@ -2659,7 +2659,7 @@ single property page
 }
 
 .dealer-name a {
-    color: #626262;
+    color: #dfdfdf;
     font-size: 20px;
     text-transform: uppercase;
     letter-spacing: 2px;
@@ -3813,7 +3813,7 @@ ul.footer-blog li {
 }
 
 .mt-4 {
-    margin-top: 20px;
+    margin-top: 20px !important;
 }
 
 .mt-5 {
@@ -3873,4 +3873,10 @@ ul.footer-blog li {
 .card nav div a {
     border: 1px solid;
     padding: 10px;
+}
+
+@media only screen and (max-width: 768px) {
+    .hideOnMobileDevice {
+        display: none;
+    }
 }

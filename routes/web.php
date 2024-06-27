@@ -11,9 +11,12 @@ Route::get('/', [App\Http\Controllers\HomeViewController::class, 'index']);
 Route::get('products', [App\Http\Controllers\HomeViewController::class, 'items']);
 Route::get('product-detail/{item_id}', [App\Http\Controllers\HomeViewController::class, 'itemDetail']);
 
-// Route::get('products', function () {
-//     return view('Pages.products');
-// });
+
+Route::get('store/{store_slug}', [App\Http\Controllers\StoreController::class, 'storeProfile']);
+
+Route::get('test', function () {
+    return view('welcome');
+});
 
 Route::get('product-detail', function () {
     return view('Pages.product_detail');
@@ -34,15 +37,9 @@ Route::middleware('auth')->group(function(){
     Route::get('delete-my-item/{item_id}', [App\Http\Controllers\ItemController::class, 'deleteMyItem']);
 
 
-    // selling
-    // Route::get('my-items', function () {
-    //     return view('Seller.my_items');
-    // });
-
     // customer
-    Route::get('recently-viewed', function () {
-        return view('Customer.recently_viewed');
-    });
+
+    Route::get('recently-viewed', [App\Http\Controllers\RecentlyViewedContoller::class, 'index']);
 
     Route::get('saved-items', function () {
         return view('Customer.saved_items');
@@ -51,11 +48,19 @@ Route::middleware('auth')->group(function(){
     Route::get('cart', function () {
         return view('Customer.cart');
     });
+    Route::post('add-to-cart/{item_id}', [App\Http\Controllers\CartController::class, 'addToCart']);
 
 
-    Route::get('bids', function () {
-        return view('Customer.bids');
-    });
+    // Route::get('bids', function () {
+    //     return view('Customer.bids');
+    // });
+
+
+    Route::get('bids', [App\Http\Controllers\BidController::class, 'sellerBids']);
+    Route::get('bid-accepted/{bid_id}', [App\Http\Controllers\BidController::class, 'sellerBidAccepted']);
+    Route::get('bid-rejected/{bid_id}', [App\Http\Controllers\BidController::class, 'sellerBidRejected']);
+    Route::get('buyer-bids', [App\Http\Controllers\BidController::class, 'myBids']);
+    Route::post('add-bid/{item_id}', [App\Http\Controllers\BidController::class, 'addBid']);
 
     Route::get('purchase-history', function () {
         return view('Customer.purchase_history');
@@ -65,6 +70,7 @@ Route::middleware('auth')->group(function(){
     Route::get('profile', function () {
         return view('Profile.profile');
     });
+    Route::post('/update-profile/{id}',  [App\Http\Controllers\ProfileContoller::class, 'update'])->name('update.profile');
 
     Route::get('identity-verification', function () {
         return view('Profile.identity_verification');

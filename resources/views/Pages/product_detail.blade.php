@@ -48,6 +48,44 @@
             margin: 30% auto;
         }
     }
+
+
+    .storeinfo-container {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin: 20px;
+        }
+        .storeinfo-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .storeinfo-icon {
+            font-size: 24px;
+            color: green;
+        }
+        .storeinfo-text {
+            font-size: 16px;
+            color: #ffffff;
+        }
+        .storeinfo-check {
+            font-size: 18px;
+            color: green;
+            margin-left: auto;
+        }
+
+        .storeinfo-check-danger {
+            font-size: 18px;
+            color: rgb(255, 0, 0);
+            margin-left: auto;
+        }
+
+
+
+   
+
 </style>
 
  <!-- property area -->
@@ -57,18 +95,23 @@
         <div class="clearfix padding-top-40" >
 
             <div class="col-md-8 single-property-content prp-style-1 ">
+                
                 <div class="row">
                     <div class="light-slide-item">
                         <div class="clearfix">
                             <div class="favorite-and-print">
-                                <h5 class="bg-primary" style="padding: 5px">Bidding</h5>
+
+                                @if($itemDetail->sale_type == 'auction')
+                                    <h5 class="bg-primary" style="padding: 5px">Bidding</h5>
+                                @endif
                             </div>
+
 
                             <ul id="image-gallery" class="gallery list-unstyled cS-hidden">
                                 @if(!empty($itemDetail->itemImage) && count($itemDetail->itemImage) > 0)
-                                    @foreach($itemDetail->itemImage as $itemImage)
-                                        <li data-thumb="{{ asset($itemImage->image) }}">
-                                            <img src="{{ asset($itemImage->image) }}" />
+                                    @foreach($itemDetail->itemImage as $item_image)
+                                        <li data-thumb="{{ asset($item_image->image) }}">
+                                            <img src="{{ asset($item_image->image) }}" alt="test" />
                                         </li>
                                     @endforeach
                                 @endif
@@ -89,8 +132,10 @@
                     </div>
                 </div>
 
-                <div class="single-property-wrapper">
+                <div class="single-property-wrapper mt-4">
                     <div class="single-property-header">
+                        <input type="hidden" value="{{ $itemDetail->id }}" id="item_id">
+                        <input type="hidden" value="{{ csrf_token() }}" id="_token">
                         <h1 class="property-title pull-left">{{ $itemDetail->item_title }}</h1>
 
                         <!-- End features area  -->
@@ -99,8 +144,12 @@
 
                     <div class="section property-features">
 
-                        <a class="btn btn-info" style="" onclick="toastrSuccess('Item Added To Cart Successfully!', 'Success')">Add to Cart</a>
-                        <a href="#" class="btn btn-warning" style="" id="createOfferBtn">Create Offer</a>
+                        <a class="btn btn-info" id="addItemToCart">Add to Cart</a>
+
+                        @if($itemDetail->sale_type == 'auction')
+                            <a href="#" class="btn btn-warning" style="" id="createOfferBtn">Create Offer</a>
+                        @endif
+
                         <a href="#" class="btn btn-success" style="">Buy it Now</a>
 
                         {{-- <ul>
@@ -201,23 +250,29 @@
 
                 {{-- create offer model --}}
 
+                @if($itemDetail->sale_type == 'auction')
+
                 <div id="createOfferModal" class="modal">
                     <div class="modal-content">
                         <span class="close">&times;</span>
                         <h2>Create Offer</h2>
-                        <form>
+                        <form method="post">
+                            @csrf
                             <div class="form-group">
-                                <label for="account">Account</label>
-                                <input type="text" class="form-control" id="account" placeholder="Enter account">
+                                <label for="account">Bid Amount</label>
+                                <input type="text" class="form-control" id="bid_amount" placeholder="Enter Offer Price">
+                                <small class="text-danger">minimum bid price: {{ env('CurrencySymbol') }} {{ $itemDetail->start_bidding_price ?? 0 + 1}}</small>
                             </div>
                             <div class="form-group">
-                                <label for="explanation">Short Explanation</label>
-                                <input type="text" class="form-control" id="explanation" placeholder="Enter short explanation">
+                                <label for="explanation">Optional Mesasge</label>
+                                <input type="text" class="form-control" id="optional_message" placeholder="Enter short message">
                             </div>
-                            <button type="submit" class="btn btn-primary">Submit</button>
+                            <button type="submit" class="btn btn-primary" id="addItemBidding">Submit</button>
                         </form>
                     </div>
                 </div>
+
+                @endif
 
                 {{-- create offer model end here --}}
 
@@ -315,33 +370,77 @@
 
                                 <div class="clear">
                                     <div class="col-xs-4 col-sm-4 dealer-face">
-                                        <a >
+                                        <a>
                                             <img src="{{ asset($itemDetail->user->profile_image) }}" class="img-circle">
                                         </a>
                                     </div>
                                     <div class="col-xs-8 col-sm-8 ">
                                         <h3 class="dealer-name">
-                                            <a href="#">{{ $itemDetail->user->name }}</a>
-                                            <p><i class="fa fa-star text-warning"></i> (3.9)</p>
+                                            <a>{{ $itemDetail->user->name }}</a>
+                                            <p><i class="fa fa-star text-warning" title="Average rating for all completed Orders."></i> (3.9)</p>
                                         </h3>
 
                                     </div>
 
                                     <div class="dealer-social-media">
-                                        <div class="row text-center" style="margin-top: 30px !important">
-                                            <div class="col-sm-2">
-                                                <i class="pe-7s-mail strong" style="font-size: 15px"> </i> @if($itemDetail->user->email_verified_at != '') Verified @else Not Verified @endif
+                                        <div class="row text-center" style="margin-top: 25px !important">
+                                            {{-- <div class="col-sm-2">
+                                                <i class="fa fa-envelope strong" style="font-size: 30px !important;color:green" title="Verified to have a valid email address."> </i>
                                             </div>
 
                                             <div class="col-sm-2">
-                                                <i class="pe-7s-call strong" style="font-size: 15px"> </i>@if($itemDetail->user->mobile_no_verified_at != '') Verified @else Not Verified @endif
+                                                <i class="fa fa-phone strong" style="font-size: 35px !important; color:green" title="Verified to have a valid phone number."> </i>
                                             </div>
 
                                             <div class="col-sm-2">
-                                                <i class="pe-7s-user strong" style="font-size: 18px"> </i>@if($itemDetail->user->identity_verified_at != '') Verified @else Not Verified @endif
+                                                <i class="fa fa-user strong" style="font-size: 25px !important" title="Identity verified through a Government-issued ID check and a proof of address."> </i>
                                             </div>
+
+                                            <div class="col-sm-2">
+                                                <i class="fa fa-credit-card strong" style="font-size: 25px !important" title="Identity verified through a Government-issued ID check and a proof of address."> </i>
+                                            </div> --}}
+
+
                                         </div>
                                     </div>
+                                </div>
+
+                                <div class="storeinfo-container">
+                                    <div class="storeinfo-item">
+                                        <i class="storeinfo-icon">&#128100;</i>
+                                        <!-- Icon for Identity -->
+                                        <span class="storeinfo-text">Identity Verified</span>
+                                        @if($itemDetail->user->identity_verified_at != '') <span class="storeinfo-check">&#10004;</span> @else <span class="storeinfo-check-danger">&#10008;</span> @endif
+                                        <!-- Checkmark -->
+                                    </div>
+                                    {{-- <div class="storeinfo-item">
+                                        <i class="storeinfo-icon">&#128179;</i>
+                                        <!-- Icon for Payment -->
+                                        <span class="storeinfo-text">Payment Verified</span>
+                                        @if($itemDetail->user->identity_verified_at != '') <span class="storeinfo-check">&#10004;</span> @else <span class="storeinfo-check-danger">&#10008;</span> @endif
+                                        <!-- Checkmark -->
+                                    </div> --}}
+                                    <div class="storeinfo-item">
+                                        <i class="storeinfo-icon">&#128222;</i>
+                                        <!-- Icon for Phone -->
+                                        <span class="storeinfo-text">Phone Verified</span>
+                                        @if($itemDetail->user->mobile_no_verified_at != '') <span class="storeinfo-check">&#10004;</span> @else <span class="storeinfo-check-danger">&#10008;</span> @endif
+                                        <!-- Checkmark -->
+                                    </div>
+                                    <div class="storeinfo-item">
+                                        <i class="storeinfo-icon">&#9993;</i>
+                                        <!-- Icon for Email -->
+                                        <span class="storeinfo-text">Email Verified</span>
+                                        @if($itemDetail->user->email_verified_at != '') <span class="storeinfo-check">&#10004;</span> @else <span class="storeinfo-check-danger">&#10008;</span> @endif
+                                        <!-- Checkmark -->
+                                    </div>
+                                    {{-- <div class="storeinfo-item">
+                                        <i class="storeinfo-icon">&#128221;</i>
+                                        <!-- Icon for Facebook -->
+                                        <span class="storeinfo-text">Facebook Connected</span>
+                                        <span class="storeinfo-check">&#10004;</span>
+                                        <!-- Checkmark -->
+                                    </div> --}}
                                 </div>
 
 
@@ -355,7 +454,7 @@
                         </div>
                     </div>
 
-                    <div class="panel panel-default sidebar-menu similar-property-wdg">
+                    <div class="panel panel-default sidebar-menu similar-property-wdg hideOnMobileDevice">
                         <div class="panel-heading">
                             <h3 class="panel-title">Sponsored Items</h3>
                         </div>
@@ -465,6 +564,8 @@
             modal.style.display = "none";
         }
     }
+    
 </script>
+
 
 @endsection

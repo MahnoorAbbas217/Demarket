@@ -20,4 +20,22 @@ class Bid extends Model
         'bid_price',     
         'bid_status',
     ];
+
+    public function item(){
+        return $this->belongsTo(Item::class, 'item_id', 'id');
+    }
+
+    public function scopeWithActiveItem($query)
+    {
+        return $query->whereHas('item', function ($query) {
+            $query->whereNull('deleted_at');
+        });
+    }
+
+    public function scopewithItemCreatedBySeller($query)
+    {
+        return $query->whereHas('item', function ($query) {
+            $query->where('created_by', loginUserId());
+        });
+    }
 }
