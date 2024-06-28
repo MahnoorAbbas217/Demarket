@@ -41,23 +41,14 @@ Route::middleware('auth')->group(function(){
 
     Route::get('recently-viewed', [App\Http\Controllers\RecentlyViewedContoller::class, 'index']);
 
-    // Route::get('saved-items', function () {
-    //     return view('Customer.saved_items');
-    // });
+
     Route::get('saved-items',  [App\Http\Controllers\SavedItemControler::class, 'mySavedItems']);
 
-    // Route::get('cart', function () {
-    //     return view('Customer.cart');
-    // });
+
     Route::get('cart', [App\Http\Controllers\CartController::class, 'myCart']);
     Route::post('add-to-cart/{item_id}', [App\Http\Controllers\CartController::class, 'addToCart']);
     Route::post('remove-item-from-cart/{cart_id}', [App\Http\Controllers\CartController::class, 'removeItemFromCart']);
     Route::post('update-cart-quantity/{cart_id}/{action}', [App\Http\Controllers\CartController::class, 'updateCartQuantity']);
-
-
-    // Route::get('bids', function () {
-    //     return view('Customer.bids');
-    // });
 
 
     Route::get('bids', [App\Http\Controllers\BidController::class, 'sellerBids']);
@@ -71,14 +62,14 @@ Route::middleware('auth')->group(function(){
     });
 
 
-    Route::get('profile', function () {
-        return view('Profile.profile');
-    });
-    Route::post('/update-profile/{id}',  [App\Http\Controllers\ProfileContoller::class, 'update']);
+    // profile
+    Route::get('profile',  [App\Http\Controllers\ProfileContoller::class, 'profile']);
+    Route::post('update-profile/{id}',  [App\Http\Controllers\ProfileContoller::class, 'updateProfile']);
 
-    Route::get('identity-verification', function () {
-        return view('Profile.identity_verification');
-    });
+
+    // identity verification
+    Route::get('identity-verification',  [App\Http\Controllers\ProfileContoller::class, 'identityVerification']);
+    Route::post('identity-verification',  [App\Http\Controllers\ProfileContoller::class, 'storeIdentityVerification']);
 
     Route::get('messages', function () {
         return view('Profile.messages');
@@ -94,9 +85,9 @@ Route::middleware('auth')->group(function(){
         return view('Profile.membership', compact('memberships'));
     });
 
-    Route::get('change-password', function () {
-        return view('Profile.change_password');
-    });
+    // change password
+    Route::get('change-password',  [App\Http\Controllers\ProfileContoller::class, 'changePassword']);
+    Route::post('update-password',  [App\Http\Controllers\ProfileContoller::class, 'updatePassword']);
 
     Route::get('logout', function () {
         Auth::logout();

@@ -31,6 +31,7 @@ return new class extends Migration
             $table->string('cnic_back_copy')->nullable();
             $table->string('date_of_birth')->nullable();
             $table->timestamp('identity_verified_at')->nullable();
+            $table->enum('identity_verification_status', ['verified', 'pending', 'rejected'])->nullable();
             $table->enum('publication_status', ['active', 'inactive', 'blocked'])->default('active');
             $table->enum('created_from', ['web', 'app', 'other'])->default('web');
             $table->rememberToken();

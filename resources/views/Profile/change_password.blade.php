@@ -7,11 +7,15 @@
         <div class="row">
             <div class="col-sm-10 col-sm-offset-1 profiel-container">
 
-                <form action="{{ URL::to('update-profile') }}" method="post" enctype="multipart/form-data">
+                <form action="{{ URL::to('update-password') }}" method="post">
                     @csrf
                     <div class="profiel-header">
                         <h3>
                             <b>Change Password</b> <br>
+
+                            @if (Session::has('message'))
+                                <p class="bg-info p3 mt-3 text-dark-bold text-center">{{ Session::get('message') }}</p>
+                            @endif
                         </h3>
                         <hr>
                     </div>
@@ -21,9 +25,9 @@
                         <div class="col-sm-6">
                             <div class="form-group">
                                 <label>Current Password:</label>
-                                <input name="shipping_address" type="text" class="form-control" placeholder="Enter Current Password">
+                                <input name="current_password" type="password" value="{{ old('current_password') }}" class="form-control" placeholder="Enter Current Password">
 
-                                @error('shipping_address')
+                                @error('current_password')
                                     <span class="invalid-feedback" role="alert">
                                         <strong class="text-danger">{{ $message }}</strong>
                                     </span>
@@ -34,9 +38,9 @@
                         <div class="col-sm-6">
                             <div class="form-group">
                                 <label>New Password:</label>
-                                <input name="permanent_address" type="text" class="form-control" placeholder="New Password">
+                                <input name="new_password" type="password" value="{{ old('new_password') }}" class="form-control" placeholder="New Password">
 
-                                @error('permanent_address')
+                                @error('new_password')
                                     <span class="invalid-feedback" role="alert">
                                         <strong class="text-danger">{{ $message }}</strong>
                                     </span>

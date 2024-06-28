@@ -20,7 +20,7 @@
                                 </ul>
 
                                 <div class="row text-right" style="margin-right: 5px">
-                                    <a href="{{ url('create-ad?type=free') }}" class="btn btn-info">{{ Auth::user()->membership_id == $membership->id ? 'Current Membership' : 'Upgrade' }}</a>
+                                    <a href="{{ url('upgrade-membership?to='.$membership->title) }}" class="btn btn-info">{{ Auth::user()->membership_id == $membership->id ? 'Current Membership' : 'Upgrade' }}</a>
                                 </div>
                         </div>
                     </div>
